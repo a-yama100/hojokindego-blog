@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     const catLabel = category || '一般'
 
     // Send notification to admin
-    await resend.emails.send({
+    await resend?.emails.send({
       from: 'おとなのAI実践ラボ <onboarding@resend.dev>',
       to: CONTACT_EMAIL,
       replyTo: email,
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Send auto-reply to user
-    await resend.emails.send({
+    await resend?.emails.send({
       from: 'おとなのAI実践ラボ <onboarding@resend.dev>',
       to: email,
       subject: '\u3010おとなのAI実践ラボ\u3011お問い合わせを受け付けました',
