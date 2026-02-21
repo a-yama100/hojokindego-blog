@@ -45,8 +45,8 @@ export function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  const navLinkClass = "px-3 py-1 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 transition-colors"
-  const mobileLinkClass = "block px-3 py-1.5 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 transition-colors"
+  const navLinkClass = "px-3 py-1 bg-emerald-700 text-white text-sm font-medium rounded hover:bg-emerald-800 transition-colors"
+  const mobileLinkClass = "block px-3 py-1.5 bg-emerald-700 text-white text-sm font-medium rounded hover:bg-emerald-800 transition-colors"
 
   const renderAuthDesktop = () => {
     if (user) {
@@ -117,7 +117,7 @@ export function Header() {
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/images/about/avatar.png" alt="運営者" width={100} height={100} className="rounded-full w-[60px] h-[60px] md:w-[72px] md:h-[72px]" />
-              <span className="text-lg font-bold text-white">Hojokin de Go!</span>
+              <span className="text-lg font-bold text-white">補助金でゴー！</span>
             </Link>
             <nav className="hidden nav:flex items-center space-x-3">
               {/* Search button */}

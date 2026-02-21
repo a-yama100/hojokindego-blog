@@ -7,21 +7,21 @@ import { FAQ, FAQJsonLd } from '@/components/FAQ'
 import { AdBanner } from '@/components/AdBanner'
 
 const faqItems = [
-  { question: 'What is Hojokin de Go?', answer: 'Hojokin de Go is a search and comparison tool for Japanese government subsidies and grants. We aggregate data from jGrants, ministry sites, and local governments to help businesses find funding.' },
-  { question: 'Who can use Japanese subsidies?', answer: 'Most subsidies target SMEs, sole proprietors, and startups registered in Japan. Some are open to specific industries, regions, or business sizes. Our filters help you find matching programs.' },
-  { question: 'What is the Opportunity Score?', answer: 'Our proprietary 0-100 score combines acceptance rate, competition level, deadline proximity, and grant amount to help you prioritize which subsidies to apply for first.' },
-  { question: 'How current is the data?', answer: 'We check official sources daily and display a Last Confirmed date on every listing. Expired subsidies are automatically hidden.' },
-  { question: 'Can you help me apply?', answer: 'We do not handle applications directly, but we link to official application pages and partner with certified consultants (gyoseishoshi, sharo-shi) who specialize in subsidy applications.' },
-  { question: 'Is it free?', answer: 'Basic search and subsidy listings are free. Premium members get deadline alerts, industry-matched recommendations, acceptance rate analytics, and priority consultant matching.' },
+  { question: '補助金でゴー！とは？', answer: '補助金でゴー！は、国や地方自治体の補助金・助成金を検索・比較できる情報サイトです。jGrantsや各省庁・自治体の情報を集約し、あなたの事業に合った補助金を見つけるお手伝いをします。' },
+  { question: '誰が補助金を申請できますか？', answer: '多くの補助金は中小企業・個人事業主・スタートアップが対象です。業種・地域・事業規模により申請可能な制度が異なります。当サイトのフィルター機能で絞り込めます。' },
+  { question: 'ターゲットスコアとは？', answer: '採択率・競争率・締切までの日数・補助額を組み合わせた0～100の独自スコアです。どの補助金から申請すべきかの優先順位付けに役立ちます。' },
+  { question: '情報は最新ですか？', answer: '公式情報源を毎日チェックし、各補助金に「最終確認日」を表示しています。締切済みの補助金は自動的に非表示になります。' },
+  { question: '申請の代行はしてもらえますか？', answer: '当サイトでは申請代行は行っておりませんが、公式申請ページへのリンクや、補助金申請に強い行政書士・社労士とのマッチングを提供しています。' },
+  { question: '無料で使えますか？', answer: '基本的な補助金検索・一覧表示は無料です。プレミアム会員は締切アラート、業種別おすすめ、採択率分析、専門家マッチングをご利用いただけます。' },
 ]
 
 const ministries = [
-  { name: 'METI', full: 'Ministry of Economy, Trade and Industry', focus: 'IT, manufacturing, innovation' },
-  { name: 'MHLW', full: 'Ministry of Health, Labour and Welfare', focus: 'Employment, training, workplace' },
-  { name: 'JTA', full: 'Japan Tourism Agency', focus: 'Tourism, hospitality, inbound' },
-  { name: 'MOE', full: 'Ministry of the Environment', focus: 'Green energy, sustainability' },
-  { name: 'Digital', full: 'Digital Agency', focus: 'DX, digitalization, IT adoption' },
-  { name: 'Local', full: 'Prefectural & Municipal', focus: 'Region-specific programs' },
+  { name: '経産省', full: '経済産業省', focus: 'IT・製造業・イノベーション' },
+  { name: '厚労省', full: '厚生労働省', focus: '雇用・訓練・職場環境' },
+  { name: '観光庁', full: '国土交通省観光庁', focus: '観光・ホスピタリティ・インバウンド' },
+  { name: '環境省', full: '環境省', focus: 'グリーンエネルギー・脱炭素' },
+  { name: 'デジタル庁', full: 'デジタル庁', focus: 'DX・デジタル化・IT活用' },
+  { name: '地方自治体', full: '都道府県・市区町村', focus: '地域限定の補助金プログラム' },
 ]
 
 export default function Home() {
@@ -30,83 +30,82 @@ export default function Home() {
       <FAQJsonLd items={faqItems} />
       <Header />
       <main>
-        {/* Hero Section */}
+        {/* ヒーロー */}
         <section className="relative bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 py-8 md:py-12">
           <Container>
             <div className="text-center max-w-3xl mx-auto">
               <p className="text-base md:text-lg text-yellow-400 font-bold mb-4 tracking-wide">
-                Hojokin de Go!
+                補助金でゴー！
               </p>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                Find the Right Subsidy<br />
-                <span className="text-emerald-400">Before the Deadline Passes</span>
+                あなたの事業に合った<br />
+                <span className="text-emerald-400">補助金を見つけよう</span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-10 font-medium">
-                Search, compare, and apply for Japanese government grants and subsidies.
+                締切前に、最適な補助金を検索・比較・申請。
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
-                  Search Subsidies
+                  補助金を検索する
                 </Link>
                 <Link href="/blog" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-white border-2 border-white hover:bg-white/10 text-lg transition-colors">
-                  Read Guides
+                  ブログを読む
                 </Link>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* Ad Banner Top */}
         <div className="py-4 bg-white">
           <Container>
             <AdBanner siteId="hojokindego" position="top" />
           </Container>
         </div>
 
-        {/* Shock Section */}
+        {/* インパクト */}
         <section className="py-16 md:py-20 bg-emerald-800">
           <Container>
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
-                Billions in subsidies go unclaimed every year.
+                毎年、数千億円の補助金が未申請のままです。
               </h2>
               <p className="text-lg md:text-xl text-emerald-100 mb-8 leading-relaxed">
-                The money is there. Most businesses just do not know how to find it.
+                お金は用意されています。ほとんどの事業者が、その存在を知らないだけなのです。
               </p>
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="bg-white/15 backdrop-blur rounded-xl p-6 border border-white/20">
                   <div className="text-4xl md:text-5xl font-black text-yellow-300 mb-2">3,000+</div>
-                  <p className="text-white text-sm">Active subsidy programs across national and local governments in Japan.</p>
+                  <p className="text-white text-sm">国・地方自治体の補助金プログラムが稼働中。</p>
                 </div>
                 <div className="bg-white/15 backdrop-blur rounded-xl p-6 border border-white/20">
                   <div className="text-4xl md:text-5xl font-black text-yellow-300 mb-2">60%</div>
-                  <p className="text-white text-sm">Of eligible SMEs never apply because they do not know the subsidy exists.</p>
+                  <p className="text-white text-sm">対象の中小企業の60％が、補助金の存在を知らず申請していません。</p>
                 </div>
                 <div className="bg-white/15 backdrop-blur rounded-xl p-6 border border-white/20">
-                  <div className="text-4xl md:text-5xl font-black text-yellow-300 mb-2">10M+</div>
-                  <p className="text-white text-sm">Yen in average grant amount for popular SME subsidy programs.</p>
+                  <div className="text-4xl md:text-5xl font-black text-yellow-300 mb-2">1,000万円+</div>
+                  <p className="text-white text-sm">人気の中小企業向け補助金の平均補助額。</p>
                 </div>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* Problem Section */}
+        {/* お悩み */}
         <section className="py-16 md:py-20 bg-gray-900">
           <Container>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
-                Sound familiar?
+                こんなお悩み、ありませんか？
               </h2>
-              <p className="text-gray-400 text-center mb-10">Finding subsidies should not be harder than running your business.</p>
+              <p className="text-gray-400 text-center mb-10">補助金探しは、事業を回すより難しくあるべきではありません。</p>
               <div className="space-y-4">
                 {[
-                  'You heard about a subsidy but the deadline had already passed',
-                  'You spent hours on jGrants but could not find anything relevant',
-                  'You found a subsidy but could not tell if your business qualifies',
-                  'You wanted to apply but the process seemed too complex',
-                  'You do not know which subsidies have high acceptance rates',
-                  'You missed a local government program because it was not on any portal',
+                  '補助金の存在を知った時には、もう締切が過ぎていた',
+                  'jGrantsで何時間も探したが、該当するものが見つからなかった',
+                  '補助金を見つけたが、自社が対象か判断できなかった',
+                  '申請したいが、手続きが複雑すぎて誰かに相談したい',
+                  'どの補助金の採択率が高いのかわからない',
+                  '地方自治体独自の補助金がどのポータルにも載っていなかった',
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3 p-4 bg-red-900/30 rounded-lg border border-red-800/50">
                     <span className="text-red-400 font-bold text-xl flex-shrink-0">-</span>
@@ -118,51 +117,51 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* Solution Section */}
+        {/* ソリューション */}
         <section className="py-16 md:py-20 bg-emerald-700">
           <Container>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
-                Hojokin de Go finds the right subsidies for you.
+                補助金でゴー！が、あなたに合った補助金を見つけます。
               </h2>
-              <p className="text-emerald-200 text-center mb-10">Search by industry, region, and business size. Get scored recommendations.</p>
+              <p className="text-emerald-200 text-center mb-10">業種・地域・事業規模で検索。スコア付きのおすすめをご提供。</p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">1</div>
-                  <h3 className="font-bold text-white text-lg mb-2">Smart Search & Filters</h3>
-                  <p className="text-emerald-100 text-sm">Filter by ministry, region, industry, business size, and deadline. Find matching subsidies in seconds.</p>
+                  <h3 className="font-bold text-white text-lg mb-2">かんたん検索・絞り込み</h3>
+                  <p className="text-emerald-100 text-sm">省庁・地域・業種・事業規模・締切で絞り込み。数秒で該当する補助金を見つけられます。</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">2</div>
-                  <h3 className="font-bold text-white text-lg mb-2">Opportunity Score (0-100)</h3>
-                  <p className="text-emerald-100 text-sm">Acceptance rate + competition + deadline proximity + grant amount = one number to prioritize your applications.</p>
+                  <h3 className="font-bold text-white text-lg mb-2">ターゲットスコア（0～100）</h3>
+                  <p className="text-emerald-100 text-sm">採択率 + 競争率 + 締切までの日数 + 補助額 = 1つの数字で優先順位を判断。</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">3</div>
-                  <h3 className="font-bold text-white text-lg mb-2">Deadline Tracking</h3>
-                  <p className="text-emerald-100 text-sm">Never miss a deadline. Sorted by urgency with automatic expiry. Premium members get email alerts.</p>
+                  <h3 className="font-bold text-white text-lg mb-2">締切管理</h3>
+                  <p className="text-emerald-100 text-sm">締切を逃さない。緊急度順に並び替え、期限切れは自動非表示。プレミアム会員はメールアラート付き。</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">4</div>
-                  <h3 className="font-bold text-white text-lg mb-2">Consultant Matching</h3>
-                  <p className="text-emerald-100 text-sm">Connect with certified gyoseishoshi and consultants who specialize in subsidy applications.</p>
+                  <h3 className="font-bold text-white text-lg mb-2">専門家マッチング</h3>
+                  <p className="text-emerald-100 text-sm">補助金申請に強い行政書士・社労士・中小企業診断士とのマッチング。</p>
                 </div>
               </div>
               <div className="flex justify-center mt-10">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
-                  Search Subsidies Free
+                  無料で補助金を検索
                 </Link>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* Ministries */}
+        {/* 情報源 */}
         <section className="py-16 bg-gray-50">
           <Container>
             <SectionHeader
-              title="Data Sources"
-              subtitle="Aggregated from national and local government programs"
+              title="情報源"
+              subtitle="国・地方自治体の補助金プログラムを集約"
               center
             />
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-8">
@@ -177,43 +176,43 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* Disclaimer */}
+        {/* 免責事項 */}
         <section className="py-8 bg-amber-50">
           <Container>
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-amber-800 text-xs">
-                Disclaimer: Hojokin de Go aggregates publicly available subsidy information for reference purposes. Always verify details on official government sites before applying. We are not responsible for changes in subsidy terms or application outcomes.
+                免責事項：補助金でゴー！は公開されている補助金情報を参考情報として提供しています。申請前に必ず公式サイトで最新情報をご確認ください。補助金の内容変更や申請結果について当サイトは責任を負いません。
               </p>
             </div>
           </Container>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA */}
         <section className="py-20 bg-gradient-to-br from-emerald-700 to-emerald-900">
           <Container>
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
-                Your next subsidy could be one search away.
+                あなたの次の補助金は、検索一つで見つかるかもしれません。
               </h2>
               <p className="text-emerald-100 text-lg mb-8 leading-relaxed">
-                3,000+ programs. Updated daily. Free to search.
+                3,000件以上の補助金。毎日更新。検索無料。
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
-                  Search Subsidies Free
+                  無料で補助金を検索
                 </Link>
                 <Link href="/pricing" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-white border-2 border-white hover:bg-white/10 text-lg transition-colors">
-                  View Premium Plans
+                  プレミアムプランを見る
                 </Link>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* FAQ Section */}
+        {/* FAQ */}
         <section className="py-16 md:py-20 bg-white">
           <Container>
-            <SectionHeader title="Frequently Asked Questions" center />
+            <SectionHeader title="よくある質問" center />
             <div className="max-w-2xl mx-auto">
               <FAQ items={faqItems} />
             </div>

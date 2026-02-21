@@ -7,23 +7,23 @@ import { ScrollToTop } from '@/components/ScrollToTop'
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.hojokindego.com'),
   title: {
-    default: 'Hojokin de Go! - Japan Subsidy & Grant Finder',
-    template: '%s | Hojokin de Go!'
+    default: '補助金でゴー！ - 補助金・助成金検索・比較サイト',
+    template: '%s | 補助金でゴー！'
   },
-  description: 'Find and compare Japanese government subsidies and grants for businesses. Acceptance rates, deadlines, and strategic scoring to maximize your chances.',
-  keywords: ['Japan subsidies', 'government grants', 'hojokin', 'business funding', 'SME grants', 'Japanese grants'],
+  description: '中小企業・個人事業主向けの補助金・助成金を簡単検索・比較。採択率・締切・ターゲットスコアで最適な補助金を見つけましょう。',
+  keywords: ['補助金', '助成金', '中小企業', 'IT導入補助金', 'ものづくり補助金', '事業再構築補助金', '持続化補助金'],
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'ja_JP',
     url: 'https://www.hojokindego.com',
-    siteName: 'Hojokin de Go!',
-    title: 'Hojokin de Go! - Japan Subsidy & Grant Finder',
-    description: 'Find and compare Japanese government subsidies and grants for businesses.',
+    siteName: '補助金でゴー！',
+    title: '補助金でゴー！ - 補助金・助成金検索・比較サイト',
+    description: '中小企業・個人事業主向けの補助金・助成金を簡単検索・比較。',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hojokin de Go! - Japan Subsidy & Grant Finder',
-    description: 'Find and compare Japanese government subsidies and grants for businesses.',
+    title: '補助金でゴー！ - 補助金・助成金検索・比較サイト',
+    description: '中小企業・個人事業主向けの補助金・助成金を簡単検索・比較。',
   },
   icons: {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Hojokin de Go!',
+  name: '補助金でゴー！',
   url: 'https://www.hojokindego.com',
   potentialAction: {
     '@type': 'SearchAction',
@@ -45,7 +45,7 @@ const websiteJsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       </head>

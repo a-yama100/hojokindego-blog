@@ -5,8 +5,8 @@ import { Container } from '@/components/Container'
 import { SectionHeader } from '@/components/SectionHeader'
 
 export const metadata: Metadata = {
-  title: 'About | Hojokindego',
-  description: 'Learn about Hojokindego - the Japanese government subsidy search and comparison site.',
+  title: '運営者について | 補助金でゴー！',
+  description: '補助金でゴー！の運営者情報とサービス概要。',
 }
 
 export default function AboutPage() {
@@ -17,29 +17,27 @@ export default function AboutPage() {
         <section className="bg-gray-950 text-white py-16">
           <Container>
             <div className="text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">About Hojokindego</h1>
-              <p className="text-gray-400 max-w-2xl mx-auto">Making Japanese government subsidies accessible to every business owner</p>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">補助金でゴー！について</h1>
+              <p className="text-gray-400 max-w-2xl mx-auto">すべての事業者に、補助金情報をわかりやすく</p>
             </div>
           </Container>
         </section>
-
         <Container size="md" className="py-16">
           <div className="space-y-12">
             <section>
-              <SectionHeader title="What is Hojokindego?" />
+              <SectionHeader title="補助金でゴー！とは？" />
               <p className="text-gray-700 leading-relaxed">
-                Hojokindego is a subsidy search and comparison media site that helps Japanese business owners find and understand government grants and subsidies (Hojokin). We aggregate information from jGrants, Mirasapo Plus, and government ministry websites to give you a clear overview of available funding.
+                補助金でゴー！は、日本の事業者向けに国や地方自治体の補助金・助成金を検索・比較できる情報メディアサイトです。jGrants、ミラサポplus、各省庁の公式サイトから情報を集約し、利用可能な補助金をわかりやすくお届けします。
               </p>
             </section>
-
             <section>
-              <SectionHeader title="What we offer" />
+              <SectionHeader title="提供サービス" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                  { title: 'Subsidy Search', desc: 'Browse subsidies filtered by category (IT, manufacturing, startup) and region (national, Tokyo, Osaka, etc.).' },
-                  { title: 'Target Score', desc: 'Our proprietary 0-100 Target Score shows how accessible each subsidy is based on requirements and competition.' },
-                  { title: 'Difficulty Rating', desc: 'Clear Easy / Medium / Hard labels help you prioritize which subsidies to pursue first.' },
-                  { title: 'Official Links', desc: 'Every subsidy links directly to the official government source so you always have the most current information.' },
+                  { title: '補助金検索', desc: 'カテゴリ（IT・製造業・スタートアップ）や地域（全国・東京・大阪など）で絞り込み検索。' },
+                  { title: 'ターゲットスコア', desc: '申請要件と競争率に基づく0～100の独自スコアで、各補助金の獲得しやすさを表示。' },
+                  { title: '難易度表示', desc: '「簡単」「普通」「難しい」の明確なラベルで、どの補助金から申請すべきか判断できます。' },
+                  { title: '公式リンク', desc: 'すべての補助金に公式の行政サイトへのリンクを掛載。常に最新情報を確認できます。' },
                 ].map(item => (
                   <div key={item.title} className="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
                     <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -48,12 +46,11 @@ export default function AboutPage() {
                 ))}
               </div>
             </section>
-
             <section>
-              <SectionHeader title="Important disclaimer" />
+              <SectionHeader title="免責事項" />
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  Hojokindego is an informational media site. We summarize publicly available subsidy information and link to official sources. We do not reproduce PDFs or official documents in full. Subsidy details including deadlines, amounts, and requirements change frequently. Always verify current information at the official government website linked on each subsidy page. We are not affiliated with any government ministry or agency. The "Last verified" date shown on each page indicates when we last checked the information. We are not responsible for decisions made based on information on this site.
+                  補助金でゴー！は情報提供を目的としたメディアサイトです。公開されている補助金情報を要約し、公式情報源へのリンクを提供しています。補助金の締切・金額・要件は頻繁に変更されます。必ず各補助金ページにリンクされた公式サイトで最新情報をご確認ください。当サイトはいかなる行政機関とも提携関係にありません。
                 </p>
               </div>
             </section>

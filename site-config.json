@@ -1,20 +1,20 @@
 {
-  "siteName": "おとなのAI実践ラボ",
-  "siteId": "ai-workhack",
-  "domain": "www.ai-workhack.com",
-  "sourcePath": "D:\\作業用\\おとなのAI実践ラボ\\Images",
+  "siteName": "補助金でゴー！",
+  "siteId": "hojokindego",
+  "domain": "www.hojokindego.com",
+  "sourcePath": "D:\\作業用\\補助金でゴー\\Images",
   "downloadIdPrefix": "DL",
   "downloadJsonPath": "data/downloads.json",
   "categories": [
-    "AI活用ガイド",
-    "副業ガイド",
-    "始め方ガイド",
-    "チュートリアル",
-    "ツール紹介"
+    "補助金ガイド",
+    "申請ノウハウ",
+    "採択率分析",
+    "業種別情報",
+    "制度解説"
   ],
   "language": "ja",
   "postCreateMethod": "python",
-  "localPath": "D:\\サイト管理\\おとなのAI実践ラボ\\おとなのAI実践ラボ-blog",
+  "localPath": "D:\\サイト管理\\補助金でゴー\\補助金でゴー-blog",
   "siteTags": [
     "otona"
   ]
