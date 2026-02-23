@@ -19,7 +19,7 @@ const SUBSIDIES: Record<string, {
     lastChecked: '2025-01-15',
   },
   'monodukuri-subsidy': {
-    title: 'Monodukuri & Shokuba Improvement Subsidy', category: 'manufacturing', region: 'national',
+    title: 'Monodukuri / Commerce / Service Subsidy', category: 'manufacturing', region: 'national',
     maxAmount: 12500000, difficulty: 'Hard', targetScore: 62, deadline: '2025-09-30',
     ministry: 'Ministry of Economy, Trade and Industry', officialUrl: 'https://portal.monodukuri-hojo.jp/',
     summary: 'Supports SMEs investing in innovative manufacturing equipment and processes.',
@@ -27,7 +27,7 @@ const SUBSIDIES: Record<string, {
     lastChecked: '2025-01-15',
   },
   'jizokuka-kyoka-subsidy': {
-    title: 'Jizokuka Kyoka Subsidy (Small Business Sustainability)', category: 'general', region: 'national',
+    title: 'Small Business Sustainability Subsidy (Jizokuka Kyoka)', category: 'general', region: 'national',
     maxAmount: 500000, difficulty: 'Easy', targetScore: 85, deadline: '2025-06-30',
     ministry: 'Japan Chamber of Commerce', officialUrl: 'https://r3.jizokukakyouka.go.jp/',
     summary: 'Broad subsidy for small businesses to improve sales channels, advertising, and operations.',
@@ -51,6 +51,7 @@ const SUBSIDIES: Record<string, {
     lastChecked: '2025-01-15',
   },
 }
+
 const DIFFICULTY_COLOR: Record<string, string> = {
   Easy: 'text-green-700 bg-green-50 border-green-200',
   Medium: 'text-yellow-700 bg-yellow-50 border-yellow-200',
@@ -61,8 +62,9 @@ export async function generateStaticParams() {
   return Object.keys(SUBSIDIES).map(slug => ({ slug }))
 }
 
-export default function SubsidyDetailPage({ params }: { params: { slug: string } }) {
-  const s = SUBSIDIES[params.slug]
+export default async function SubsidyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const s = SUBSIDIES[slug]
   if (!s) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -81,8 +83,6 @@ export default function SubsidyDetailPage({ params }: { params: { slug: string }
   }
   const scoreColor = s.targetScore >= 75 ? 'text-green-700' : s.targetScore >= 55 ? 'text-yellow-600' : 'text-red-600'
   const scoreBg = s.targetScore >= 75 ? 'bg-green-50 border-green-300' : s.targetScore >= 55 ? 'bg-yellow-50 border-yellow-300' : 'bg-red-50 border-red-300'
-  const officialUrl = s.officialUrl
-
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -94,12 +94,10 @@ export default function SubsidyDetailPage({ params }: { params: { slug: string }
             <p className="text-gray-400 text-sm mt-2">{s.ministry}</p>
           </Container>
         </section>
-
         <Container className="py-8">
           <div className="flex justify-start mb-6">
             <Link href="/subsidies"><Button variant="outline" size="sm">Back to List</Button></Link>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className={'border-2 rounded-xl p-4 text-center ' + scoreBg}>
               <p className="text-xs text-gray-500 mb-1">Target Score</p>
@@ -119,13 +117,11 @@ export default function SubsidyDetailPage({ params }: { params: { slug: string }
               <p className="text-sm font-bold text-gray-900">{s.deadline}</p>
             </div>
           </div>
-
           <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
             <h2 className="text-lg font-bold text-gray-900 mb-3">Overview</h2>
             <p className="text-gray-700">{s.summary}</p>
             <p className="text-xs text-gray-400 mt-4">Last verified: {s.lastChecked}. Always check the official source for the latest information.</p>
           </div>
-
           <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
             <h2 className="text-lg font-bold text-gray-900 mb-3">Key Requirements</h2>
             <ul className="space-y-2">
@@ -137,14 +133,11 @@ export default function SubsidyDetailPage({ params }: { params: { slug: string }
               ))}
             </ul>
           </div>
-
           <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 text-center">
             <h3 className="text-lg font-bold text-gray-900 mb-2">Apply via Official Source</h3>
             <p className="text-gray-600 text-sm mb-4">Always confirm details and apply through the official government website.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Button variant="primary" onClick={() => window.open(officialUrl, '_blank')}>
-                Official Website
-              </Button>
+              <a href={s.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 bg-emerald-700 text-white font-bold rounded-lg hover:bg-emerald-800 transition-colors">Official Website</a>
               <Link href="/subsidies"><Button variant="outline">Back to List</Button></Link>
             </div>
           </div>
