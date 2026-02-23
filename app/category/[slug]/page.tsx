@@ -1,30 +1,59 @@
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
-import Link from 'next/link'
 import { Button } from '@/components/Button'
+import { SubsidyCard } from '@/components/SubsidyCard'
+import { CATEGORIES } from '@/data/subsidies'
+import { createServiceClient } from '@/lib/supabase/server'
+import Link from 'next/link'
 
-const CATEGORY_LABELS: Record<string, string> = {
-  digitalization: 'IT\u30fb\u30c7\u30b8\u30bf\u30eb\u5316',
-  manufacturing: '\u88fd\u9020\u696d\u30fb\u3082\u306e\u3065\u304f\u308a',
-  general: '\u4e00\u822c\u4e8b\u696d',
-  reconstruction: '\u4e8b\u696d\u518d\u69cb\u7bc9',
-  startup: '\u5275\u696d\u30fb\u30b9\u30bf\u30fc\u30c8\u30a2\u30c3\u30d7',
-}
+export const revalidate = 3600
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const label = CATEGORY_LABELS[slug] || slug
+  const cat = CATEGORIES[slug]
+  const label = cat ? cat.label : slug
+
+  const supabase = await createServiceClient()
+  const { data: subsidies } = await supabase
+    .from('subsidies')
+    .select('*')
+    .eq('is_active', true)
+    .eq('category', slug)
+    .order('target_score', { ascending: false })
+
+  const items = subsidies || []
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main>
-        <Container className="py-20 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{"\u30ab\u30c6\u30b4\u30ea: "}{label}</h1>
-          <p className="text-gray-600 mb-6">{"\u30ab\u30c6\u30b4\u30ea\u5225\u306e\u88dc\u52a9\u91d1\u4e00\u89a7\u306f\u8fd1\u65e5\u516c\u958b\u4e88\u5b9a\u3067\u3059\u3002"}</p>
-          <div className="flex justify-center">
-            <Link href="/subsidies"><Button variant="primary">{"\u88dc\u52a9\u91d1\u4e00\u89a7\u306b\u623b\u308b"}</Button></Link>
+        <section className="bg-gray-950 text-white py-10">
+          <Container>
+            <div className="text-center">
+              <p className="text-emerald-400 text-sm font-medium mb-1">{"\u30ab\u30c6\u30b4\u30ea\u5225\u88dc\u52a9\u91d1"}</p>
+              <h1 className="text-3xl md:text-4xl font-bold">{label}</h1>
+            </div>
+          </Container>
+        </section>
+        <Container className="py-8">
+          <div className="flex flex-wrap gap-2 mb-6">
+            <Link href="/subsidies" className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">{"\u3059\u3079\u3066"}</Link>
+            {Object.entries(CATEGORIES).map(([s, c]) => (
+              <Link key={s} href={"/category/" + s} className={"px-4 py-1.5 rounded-full text-sm font-medium transition-colors " + (s === slug ? "bg-emerald-700 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300")}>
+                {c.label}
+              </Link>
+            ))}
           </div>
+          {items.length > 0 ? (
+            <div className="space-y-4">
+              {items.map((s: any) => <SubsidyCard key={s.slug} s={s} />)}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500 mb-4">{"\u3053\u306e\u30ab\u30c6\u30b4\u30ea\u306e\u88dc\u52a9\u91d1\u306f\u307e\u3060\u767b\u9332\u3055\u308c\u3066\u3044\u307e\u305b\u3093\u3002"}</p>
+              <Link href="/subsidies"><Button variant="primary">{"\u88dc\u52a9\u91d1\u4e00\u89a7\u306b\u623b\u308b"}</Button></Link>
+            </div>
+          )}
         </Container>
       </main>
       <Footer />
