@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim()
+}
+
 const JGRANTS_BASE = 'https://api.jgrants-portal.go.jp/exp/v1/public/subsidies'
 const KEYWORDS = ['補助金', '助成金', 'IT導入', 'DX', '創業', 'ものづくり', '事業再構築', '持続化']
 
@@ -166,7 +170,7 @@ export async function GET(request: Request) {
               const d = detailJson?.result?.[0]
               if (d) {
                 const updates: Record<string, any> = { updated_at: new Date().toISOString() }
-                if (d.detail) updates.summary = d.detail.substring(0, 500)
+                if (d.detail) updates.summary = stripHtml(d.detail).substring(0, 1000)
                 if (d.detail) updates.detail = d.detail
                 if (d.subsidy_rate) updates.subsidy_rate = d.subsidy_rate
                 if (d.use_purpose) updates.target_industry = d.use_purpose
