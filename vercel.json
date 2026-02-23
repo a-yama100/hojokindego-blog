@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/fetch-subsidies",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/expire-subsidies",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
