@@ -5,13 +5,8 @@ const JGRANTS_BASE = 'https://api.jgrants-portal.go.jp/exp/v1/public/subsidies'
 const KEYWORDS = ['補助金', '助成金', 'IT導入', 'DX', '創業', 'ものづくり', '事業再構築', '持続化']
 
 function generateSlug(title: string, id: string): string {
-  const clean = title
-    .replace(/[\(\)\[\]\{\}\/\\\|\?\*\+\.\^\$#!@%&=~\'",;<>]/g, '')
-    .trim()
-    .substring(0, 40)
-  const base = encodeURIComponent(clean).substring(0, 60)
-  const shortId = id.substring(id.length - 6)
-  return 'jg-' + shortId + '-' + (base || 'subsidy')
+  const shortId = id.substring(id.length - 8)
+  return 'jg-' + shortId
 }
 
 function guessCategory(title: string, detail: string, industry: string): string {
