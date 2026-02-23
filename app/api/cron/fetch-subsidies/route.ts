@@ -2,24 +2,24 @@ import { NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 
 const JGRANTS_BASE = 'https://api.jgrants-portal.go.jp/exp/v1/public/subsidies'
-const KEYWORDS = ['IT', 'DX', 'manufacturing', 'startup', 'subsidy']
+const KEYWORDS = ['補助金', '助成金', 'IT導入', 'DX', '創業', 'ものづくり', '事業再構築', '持続化']
 
 function generateSlug(title: string, id: string): string {
-  const base = title
-    .replace(/[^a-zA-Z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\s-]/g, '')
+  const clean = title
+    .replace(/[\(\)\[\]\{\}\/\\\|\?\*\+\.\^\$#!@%&=~\'",;<>]/g, '')
     .trim()
-    .substring(0, 50)
-    .replace(/\s+/g, '-')
-    .toLowerCase()
-  return base ? base + '-' + id.substring(0, 6) : 'subsidy-' + id.substring(0, 10)
+    .substring(0, 40)
+  const base = encodeURIComponent(clean).substring(0, 60)
+  const shortId = id.substring(id.length - 6)
+  return 'jg-' + shortId + '-' + (base || 'subsidy')
 }
 
 function guessCategory(title: string, detail: string, industry: string): string {
-  const text = (title + ' ' + detail + ' ' + industry).toLowerCase()
-  if (text.includes('it') || text.includes('digital') || text.includes('dx') || text.includes('\u30c7\u30b8\u30bf\u30eb')) return 'digitalization'
-  if (text.includes('\u88fd\u9020') || text.includes('\u3082\u306e\u3065\u304f\u308a') || text.includes('manufacturing')) return 'manufacturing'
-  if (text.includes('\u5275\u696d') || text.includes('startup') || text.includes('\u8d77\u696d')) return 'startup'
-  if (text.includes('\u518d\u69cb\u7bc9') || text.includes('\u8ee2\u63db')) return 'reconstruction'
+  const text = title + ' ' + detail + ' ' + industry
+  if (/IT|DX|\u30c7\u30b8\u30bf\u30eb|ICT|\u60c5\u5831/.test(text)) return 'digitalization'
+  if (/\u88fd\u9020|\u3082\u306e\u3065\u304f\u308a|\u8a2d\u5099/.test(text)) return 'manufacturing'
+  if (/\u5275\u696d|\u8d77\u696d|\u30b9\u30bf\u30fc\u30c8/.test(text)) return 'startup'
+  if (/\u518d\u69cb\u7bc9|\u8ee2\u63db|\u65b0\u4e8b\u696d/.test(text)) return 'reconstruction'
   return 'general'
 }
 
@@ -32,11 +32,11 @@ function guessDifficulty(maxAmount: number | null): string {
 
 function guessRegion(area: string): string {
   if (!area) return 'national'
-  if (area.includes('\u5168\u56fd')) return 'national'
-  if (area.includes('\u6771\u4eac')) return 'tokyo'
-  if (area.includes('\u5927\u962a')) return 'osaka'
-  if (area.includes('\u611b\u77e5')) return 'aichi'
-  if (area.includes('\u798f\u5ca1')) return 'fukuoka'
+  if (/\u5168\u56fd/.test(area)) return 'national'
+  if (/\u6771\u4eac/.test(area)) return 'tokyo'
+  if (/\u5927\u962a/.test(area)) return 'osaka'
+  if (/\u611b\u77e5/.test(area)) return 'aichi'
+  if (/\u798f\u5ca1/.test(area)) return 'fukuoka'
   return 'national'
 }
 
@@ -63,25 +63,41 @@ export async function GET(request: Request) {
   const supabase = createServiceClient()
   let totalNew = 0
   let totalUpdated = 0
+  let totalSkipped = 0
   let totalErrors = 0
+  const seenIds = new Set<string>()
 
   for (const keyword of KEYWORDS) {
     try {
-      const url = JGRANTS_BASE + '?keyword=' + encodeURIComponent(keyword)
+      const params = new URLSearchParams({
+        keyword: keyword,
+        acceptance: '1',
+        sort: 'acceptance_end_datetime',
+        order: 'ASC',
+      })
+      const url = JGRANTS_BASE + '?' + params.toString()
       const res = await fetch(url, {
         headers: { 'Accept': 'application/json' },
         signal: AbortSignal.timeout(30000),
       })
-      if (!res.ok) continue
+      if (!res.ok) {
+        totalErrors++
+        continue
+      }
 
       const json = await res.json()
       const items = json?.result || []
 
       for (const item of items) {
         if (!item.id || !item.title) continue
+        if (seenIds.has(item.id)) { totalSkipped++; continue }
+        seenIds.add(item.id)
 
         const endDate = item.acceptance_end_datetime
           ? item.acceptance_end_datetime.split('T')[0]
+          : null
+        const startDate = item.acceptance_start_datetime
+          ? item.acceptance_start_datetime.split('T')[0]
           : null
 
         const today = new Date()
@@ -89,17 +105,18 @@ export async function GET(request: Request) {
           ? Math.ceil((new Date(endDate).getTime() - today.getTime()) / 86400000)
           : 30
 
-        if (daysLeft < 0) continue
+        if (daysLeft < 0) { totalSkipped++; continue }
 
         const area = item.target_area_search || ''
         const slug = generateSlug(item.title, item.id)
+        const detail = item.detail || item.subsidy_catch_phrase || ''
 
         const row = {
           jgrants_id: item.id,
           slug: slug,
           title: item.title,
-          summary: item.detail || item.subsidy_catch_phrase || null,
-          category: guessCategory(item.title, item.detail || '', item.industry || ''),
+          summary: detail ? detail.substring(0, 500) : null,
+          category: guessCategory(item.title, detail, item.industry || ''),
           region: guessRegion(area),
           max_amount: item.subsidy_max_limit || null,
           difficulty: guessDifficulty(item.subsidy_max_limit),
@@ -108,11 +125,11 @@ export async function GET(request: Request) {
           ministry: null,
           official_url: item.front_subsidy_detail_page_url || null,
           jgrants_url: 'https://www.jgrants-portal.go.jp/subsidy/' + item.id,
-          subsidy_rate: item.subsidy_rate || null,
+          subsidy_rate: null,
           target_industry: item.industry || null,
           target_employees: item.target_number_of_employees || null,
-          detail: item.detail || null,
-          acceptance_start: item.acceptance_start_datetime ? item.acceptance_start_datetime.split('T')[0] : null,
+          detail: detail || null,
+          acceptance_start: startDate,
           acceptance_end: endDate,
           is_active: true,
           last_checked: today.toISOString().split('T')[0],
@@ -141,7 +158,7 @@ export async function GET(request: Request) {
         }
       }
 
-      await new Promise(r => setTimeout(r, 1000))
+      await new Promise(r => setTimeout(r, 1500))
     } catch {
       totalErrors++
     }
@@ -151,6 +168,8 @@ export async function GET(request: Request) {
     message: 'jGrants fetch completed',
     new: totalNew,
     updated: totalUpdated,
+    skipped: totalSkipped,
     errors: totalErrors,
+    keywords_used: KEYWORDS.length,
   })
 }
