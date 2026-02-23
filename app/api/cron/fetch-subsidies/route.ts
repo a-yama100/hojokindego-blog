@@ -145,11 +145,39 @@ export async function GET(request: Request) {
           if (error) totalErrors++
           else totalUpdated++
         } else {
+          const newId = crypto.randomUUID()
           const { error } = await supabase
             .from('subsidies')
-            .insert({ ...row, id: crypto.randomUUID(), created_at: today.toISOString() })
+            .insert({ ...row, id: newId, created_at: today.toISOString() })
           if (error) totalErrors++
           else totalNew++
+        }
+
+        // Fetch detail if summary is missing
+        if (!row.summary) {
+          try {
+            const detailUrl = 'https://api.jgrants-portal.go.jp/exp/v1/public/subsidies/id/' + item.id
+            const detailRes = await fetch(detailUrl, {
+              headers: { 'Accept': 'application/json' },
+              signal: AbortSignal.timeout(15000),
+            })
+            if (detailRes.ok) {
+              const detailJson = await detailRes.json()
+              const d = detailJson?.result?.[0]
+              if (d) {
+                const updates: Record<string, any> = { updated_at: new Date().toISOString() }
+                if (d.detail) updates.summary = d.detail.substring(0, 500)
+                if (d.detail) updates.detail = d.detail
+                if (d.subsidy_rate) updates.subsidy_rate = d.subsidy_rate
+                if (d.use_purpose) updates.target_industry = d.use_purpose
+                if (d.front_subsidy_detail_page_url) updates.official_url = d.front_subsidy_detail_page_url
+                if (Object.keys(updates).length > 1) {
+                  await supabase.from('subsidies').update(updates).eq('jgrants_id', item.id)
+                }
+              }
+            }
+            await new Promise(r => setTimeout(r, 500))
+          } catch {}
         }
       }
 
