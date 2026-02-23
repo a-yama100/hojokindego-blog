@@ -14,7 +14,7 @@ import { AdBanner } from '@/components/AdBanner'
 
 export const metadata: Metadata = {
   title: 'ブログ',
-  description: 'AI活用の実践的なノウハウを発信。55歳以上の方がAIで稼ぐためのヒントが満載。',
+  description: '補助金・助成金の最新情報や申請のコツ、採択率を上げるノウハウを発信。',
 }
 
 export const revalidate = 60
@@ -54,7 +54,7 @@ export default async function BlogPage() {
       <Header />
       <main>
         {/* Hero */}
-        <PageHero title="ブログ" subtitle="AI活用の実践的なノウハウを発信" />
+        <PageHero title="ブログ" subtitle="補助金・助成金の最新情報と申請のコツ" />
 
         {/* Posts */}
 <section className="py-4">

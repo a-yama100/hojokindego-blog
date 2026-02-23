@@ -45,11 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: post.title + '| おとなのAI実践ラボ',
-    description: (post.description || '') + ' | おとなのAI実践ラボ - 55歳からのAI副収入',
+    title: post.title + '| 補助金でゴー！',
+    description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
     openGraph: {
-      title: post.title + '| おとなのAI実践ラボ',
-      description: (post.description || '') + ' | おとなのAI実践ラボ - 55歳からのAI副収入',
+      title: post.title + '| 補助金でゴー！',
+      description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
       type: 'article',
       publishedTime: post.published_at || undefined,
       modifiedTime: post.updated_at || undefined,
@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title + '| おとなのAI実践ラボ',
-      description: (post.description || '') + ' | おとなのAI実践ラボ - 55歳からのAI副収入',
+      title: post.title + '| 補助金でゴー！',
+      description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
       images: post.thumbnail_url ? [post.thumbnail_url] : undefined,
     },
   }
@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: Props) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'AI Work Hack',
+      name: '補助金でゴー！',
       url: 'https://www.ai-workhack.com',
     },
     mainEntityOfPage: {

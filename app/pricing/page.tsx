@@ -20,7 +20,7 @@ const plans = [
     name: '無料会員',
     price: 0,
     period: '',
-    description: 'まずは雰囲気を体験したい方',
+    description: 'まずは無料で補助金を探したい方',
     features: [
       '基本記事の閲覧',
       '一部ツールの体験利用（回数制限あり）',
@@ -43,7 +43,7 @@ const plans = [
     name: 'ライト会員',
     price: 1650,
     period: '/月',
-    description: 'AI活用の基礎を知りたい方の入口',
+    description: '締切アラートや業種別おすすめを活用したい方',
     features: [
       '会員限定記事（基礎・整理系）',
       '月1回の「今月のAI整理便」',
@@ -64,7 +64,7 @@ const plans = [
     name: 'スタンダード会員',
     price: 3300,
     period: '/月',
-    description: 'AI前提の作業ルーティンを本格構築したい方',
+    description: '採択率分析や専門家マッチングを活用したい方',
     features: [
       '全ての会員記事（実践・運用系含む）',
       '全ツール使い放題',
@@ -84,7 +84,7 @@ const plans = [
     name: 'プレミアム会員',
     price: 5500,
     period: '/月',
-    description: '個別伴走で自分仕様のAI環境を構築したい方',
+    description: '個別サポートで補助金申請を成功させたい方',
     features: [
       'スタンダードの全内容',
       '月1回のオンライン伴走セッション（Zoom）',
