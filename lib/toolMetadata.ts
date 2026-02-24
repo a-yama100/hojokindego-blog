@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { createServiceClient } from '@/lib/supabase/server'
 
-const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID || 'ai-workhack'
+const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
 
 export async function generateToolMetadata(toolId: string): Promise<Metadata> {
   try {

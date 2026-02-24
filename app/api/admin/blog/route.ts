@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     const { data, error } = await supabase
       .from('blog_posts')
       .select('id, slug, title, category, is_published, is_premium, required_plan, published_at, created_at, updated_at, deleted_at, access_level')
-      .eq('site_id', 'ai-workhack')
+      .eq('site_id', 'hojokindego')
       .order('created_at', { ascending: false })
     if (error) throw error
     return NextResponse.json({ posts: data })
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     const supabase = createServiceClient()
     const { data, error } = await supabase
       .from('blog_posts')
-      .insert({ ...body, site_id: 'ai-workhack' })
+      .insert({ ...body, site_id: 'hojokindego' })
       .select()
       .single()
     if (error) throw error
