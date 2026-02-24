@@ -3,6 +3,7 @@ import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
 import { Button } from '@/components/Button'
 import { DIFFICULTY_COLOR_BORDER } from '@/data/subsidies'
+import { DeadlineLabel } from '@/components/DeadlineLabel'
 import { createServiceClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
