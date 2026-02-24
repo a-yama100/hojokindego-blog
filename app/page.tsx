@@ -56,7 +56,7 @@ export default function Home() {
           </Container>
         </section>
 
-        <div className="py-4 bg-white">
+        <div className="bg-white">
           <Container>
             <AdBanner siteId="hojokindego" position="top" />
           </Container>
