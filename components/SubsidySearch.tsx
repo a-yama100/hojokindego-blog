@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { CATEGORIES, REGIONS, DIFFICULTY_COLOR } from '@/data/subsidies'
+import { DeadlineLabel } from '@/components/DeadlineLabel'
 
 interface SubsidyItem {
   id: string; slug: string; title: string; summary: string | null

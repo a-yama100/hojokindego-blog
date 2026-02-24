@@ -71,6 +71,7 @@ export default async function SubsidyDetailPage({ params }: { params: Promise<{ 
             <div className="bg-white border border-gray-200 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500 mb-1">{"\u7de0\u5207"}</p>
               <p className="text-sm font-bold text-gray-900">{s.deadline || '-'}</p>
+              <DeadlineLabel deadline={s.deadline} />
             </div>
           </div>
           {s.summary && (

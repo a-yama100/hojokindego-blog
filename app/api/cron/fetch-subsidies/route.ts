@@ -6,7 +6,7 @@ function stripHtml(html: string): string {
 }
 
 const JGRANTS_BASE = 'https://api.jgrants-portal.go.jp/exp/v1/public/subsidies'
-const KEYWORDS = ['補助金', '助成金', 'IT導入', 'DX', '創業', 'ものづくり', '事業再構築', '持続化']
+const KEYWORDS = ['補助金', '助成金', 'IT導入', 'DX', '創業', 'ものづくり', '事業再構築', '持続化', '省エネ', '資金繰り', '雇用', '小規模', '中小企業', '設備投資', '販路拡大', 'デジタル', '転換', '地域振興']
 
 function generateSlug(title: string, id: string): string {
   const shortId = id.substring(id.length - 8)
