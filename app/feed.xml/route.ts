@@ -3,11 +3,13 @@ import { createServiceClient } from '@/lib/supabase/server'
 
 export async function GET() {
   const baseUrl = 'https://www.hojokindego.com'
+  const siteId = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
   const supabase = createServiceClient()
 
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('slug, title, description, category, published_at, updated_at')
+    .eq('site_id', siteId)
     .eq('is_published', true)
     .is('deleted_at', null)
     .order('published_at', { ascending: false })
