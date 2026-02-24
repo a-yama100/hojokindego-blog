@@ -78,7 +78,15 @@ export default async function SubsidyDetailPage({ params }: { params: Promise<{ 
           {s.summary && (
             <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
               <h2 className="text-lg font-bold text-gray-900 mb-3">{"\u6982\u8981"}</h2>
-              <p className="text-gray-700">{s.summary}</p>
+              <div className="text-gray-700 space-y-3">
+                {s.summary
+                  .replace(/--+/g, '')
+                  .replace(/■/g, '\n\n■')
+                  .split('\n')
+                  .filter((line: string) => line.trim())
+                  .map((line: string, i: number) => <p key={i}>{line.trim()}</p>)
+                }
+              </div>
               {s.last_checked && <p className="text-xs text-gray-400 mt-4">{"\u6700\u7d42\u78ba\u8a8d\u65e5: "}{s.last_checked}{"\u3002\u6700\u65b0\u60c5\u5831\u306f\u5fc5\u305a\u516c\u5f0f\u30b5\u30a4\u30c8\u3067\u3054\u78ba\u8a8d\u304f\u3060\u3055\u3044\u3002"}</p>}
             </div>
           )}
