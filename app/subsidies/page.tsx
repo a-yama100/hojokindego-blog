@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
@@ -21,14 +22,16 @@ export default async function SubsidiesPage() {
         <section className="bg-gray-950 text-white py-10">
           <Container>
             <div className="text-center">
-              <p className="text-emerald-400 text-sm font-medium mb-1">{"\u88dc\u52a9\u91d1\u691c\u7d22"}</p>
-              <h1 className="text-3xl md:text-4xl font-bold">{"\u3042\u306a\u305f\u306b\u5408\u3063\u305f\u88dc\u52a9\u91d1\u3092\u898b\u3064\u3051\u3088\u3046"}</h1>
-              <p className="text-gray-400 text-sm mt-2">{"\u4e2d\u5c0f\u4f01\u696d\u30fb\u500b\u4eba\u4e8b\u696d\u4e3b\u5411\u3051\u306e\u88dc\u52a9\u91d1\u30fb\u52a9\u6210\u91d1\u4e00\u89a7"}</p>
+              <p className="text-emerald-400 text-sm font-medium mb-1">{"補助金検索"}</p>
+              <h1 className="text-3xl md:text-4xl font-bold">{"あなたに合った補助金を見つけよう"}</h1>
+              <p className="text-gray-400 text-sm mt-2">{"中小企業・個人事業主向けの補助金・助成金一覧"}</p>
             </div>
           </Container>
         </section>
         <Container className="py-8">
-          <SubsidySearch initialData={subsidies || []} />
+          <Suspense fallback={<div className="text-center py-8 text-gray-500">{"読み込み中..."}</div>}>
+            <SubsidySearch initialData={subsidies || []} />
+          </Suspense>
         </Container>
       </main>
       <Footer />
