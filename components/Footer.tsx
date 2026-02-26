@@ -49,7 +49,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-          1995-{currentYear} 補助金でゴー！ All Rights Reserved.
+          {currentYear} 補助金でゴー！ All Rights Reserved.
         </div>
       </Container>
     </footer>

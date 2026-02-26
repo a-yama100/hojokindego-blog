@@ -8,7 +8,7 @@ import { AdBanner } from '@/components/AdBanner'
 
 const faqItems = [
   { question: '補助金でゴー！とは？', answer: '補助金でゴー！は、国や地方自治体の補助金・助成金を検索・比較できる情報サイトです。jGrantsや各省庁・自治体の情報を集約し、あなたの事業に合った補助金を見つけるお手伝いをします。' },
-  { question: '誰が補助金を申請できますか？', answer: '多くの補助金は中小企業・個人事業主・スタートアップが対象です。業種・地域・事業規模により申請可能な制度が異なります。当サイトのフィルター機能で絞り込めます。' },
+  { question: '誰が補助金を申請できますか？', answer: '多くの補助金は中小企業・個人事業主・スタートアップが対象です。業種・地域・事業規模により申請可能な制度が異なります。当サイトのフィルター機能で簡単に絞り込めます。' },
   { question: 'ターゲットスコアとは？', answer: '採択率・競争率・締切までの日数・補助額を組み合わせた0～100の独自スコアです。どの補助金から申請すべきかの優先順位付けに役立ちます。' },
   { question: '情報は最新ですか？', answer: '公式情報源を毎日チェックし、各補助金に「最終確認日」を表示しています。締切済みの補助金は自動的に非表示になります。' },
   { question: '申請の代行はしてもらえますか？', answer: '当サイトでは申請代行は行っておりませんが、公式申請ページへのリンクや、補助金申請に強い行政書士・社労士とのマッチングを提供しています。' },
@@ -35,14 +35,14 @@ export default function Home() {
           <Container>
             <div className="text-center max-w-3xl mx-auto">
               <p className="text-base md:text-lg text-yellow-400 font-bold mb-4 tracking-wide">
-                補助金でゴー！
+                なんと！ 毎年「数千億円」の補助金が未申請のまま…
               </p>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
                 あなたの事業に合った<br />
-                <span className="text-emerald-400">補助金を見つけよう</span>
+                <span className="text-emerald-400">補助金が見つかる！</span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-10 font-medium">
-                締切前に、最適な補助金を検索・比較・申請。
+                締切前に、最適な補助金を検索・比較・申請
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
@@ -67,7 +67,7 @@ export default function Home() {
           <Container>
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
-                毎年、数千億円の補助金が未申請のままです。
+                なんと！ 毎年「数千億円」の補助金が未申請のまま…
               </h2>
               <p className="text-lg md:text-xl text-emerald-100 mb-8 leading-relaxed">
                 お金は用意されています。ほとんどの事業者が、その存在を知らないだけなのです。
@@ -97,7 +97,7 @@ export default function Home() {
               <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
                 こんなお悩み、ありませんか？
               </h2>
-              <p className="text-gray-400 text-center mb-10">補助金探しは、事業を回すより難しくあるべきではありません。</p>
+              <p className="text-gray-400 text-center mb-10">補助金探しでつまずくポイントとは？</p>
               <div className="space-y-4">
                 {[
                   '補助金の存在を知った時には、もう締切が過ぎていた',
@@ -122,9 +122,9 @@ export default function Home() {
           <Container>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
-                補助金でゴー！が、あなたに合った補助金を見つけます。
+                補助金でゴー！であなたに合った補助金が見つかる！
               </h2>
-              <p className="text-emerald-200 text-center mb-10">業種・地域・事業規模で検索。スコア付きのおすすめをご提供。</p>
+              <p className="text-emerald-200 text-center mb-10">業種・地域・事業規模で検索。スコア付きのおすすめをご提供</p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">1</div>
@@ -192,10 +192,10 @@ export default function Home() {
           <Container>
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
-                あなたの次の補助金は、検索一つで見つかるかもしれません。
+                あなたの次の補助金は、無料検索で見つかる！
               </h2>
               <p className="text-emerald-100 text-lg mb-8 leading-relaxed">
-                3,000件以上の補助金。毎日更新。検索無料。
+                3,000件以上の補助金。毎日更新。検索無料
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
