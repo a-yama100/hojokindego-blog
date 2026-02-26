@@ -6,6 +6,7 @@ import { DIFFICULTY_COLOR_BORDER } from '@/data/subsidies'
 import { DeadlineLabel } from '@/components/DeadlineLabel'
 import { createServiceClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { SubsidyMemberSection } from '@/components/SubsidyMemberSection'
 
 export const revalidate = 3600
 
@@ -103,6 +104,15 @@ export default async function SubsidyDetailPage({ params }: { params: Promise<{ 
               </ul>
             </div>
           )}
+          <SubsidyMemberSection
+            subsidyTitle={s.title}
+            subsidySlug={s.slug}
+            category={s.category || null}
+            difficulty={s.difficulty || null}
+            maxAmount={s.max_amount || null}
+            targetScore={s.target_score || null}
+            summary={s.summary || null}
+          />
           {s.official_url && (
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 text-center">
               <h3 className="text-lg font-bold text-gray-900 mb-2">{"\u516c\u5f0f\u30b5\u30a4\u30c8\u304b\u3089\u7533\u8acb"}</h3>

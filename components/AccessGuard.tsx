@@ -9,7 +9,7 @@ import { hasAccess } from '@/lib/supabase/types'
 interface AccessGuardProps {
   toolId: string
   requiredPlan?: PlanType
-  children: React.ReactNode
+  children: React.ReactNode | ((checkAccess: () => boolean) => React.ReactNode)
 }
 
 const PLAN_LABELS: Record<PlanType, string> = {
