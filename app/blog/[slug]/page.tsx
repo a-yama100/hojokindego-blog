@@ -150,7 +150,7 @@ export default async function BlogPostPage({ params }: Props) {
                 />
                 <BlogRelatedTools category={post.category} />
                 <RelatedPosts slug={slug} category={post.category} />
-                <AuthorBio />
+                {/* <AuthorBio /> */}
               </article>
             </div>
             <div className="hidden lg:block w-72 flex-shrink-0">
