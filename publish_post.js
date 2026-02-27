@@ -23,6 +23,7 @@ const R2_BUCKET_NAME = env.R2_BUCKET_NAME;
 const R2_PUBLIC_URL = env.R2_PUBLIC_URL;
 const R2_ENDPOINT = env.R2_ENDPOINT;
 const SITE_ID = env.NEXT_PUBLIC_SITE_ID || 'ai-workhack';
+const SITE_URL = env.NEXT_PUBLIC_SITE_URL || 'https://ai-workhack.com';
 
 // Load site config for tags
 const siteConfigPath = path.join(__dirname, 'site-config.json');
@@ -266,7 +267,7 @@ async function publishPost(postFolder) {
   }
 
   console.log('Post created successfully!');
-  console.log('Done! View at: https://ai-workhack.com/blog/' + frontmatter.slug);
+  console.log('Done! View at: ' + SITE_URL + '/blog/' + frontmatter.slug);
 }
 
 // Run
