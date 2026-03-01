@@ -17,7 +17,7 @@ function buildAdminHtml(name: string, email: string, catLabel: string, message: 
     '<h3 style="margin-top:0;color:#374151">お問い合わせ内容</h3>',
     '<p style="white-space:pre-wrap;line-height:1.6">' + message + '</p>',
     '</div>',
-    '<p style="color:#6b7280;font-size:12px">hojokindego.comのお問い合わせフォームから送信。Reply-To: ' + email + '</p>',
+    '<p style="color:#6b7280;font-size:12px">hojokin.phtechai.comのお問い合わせフォームから送信。Reply-To: ' + email + '</p>',
     '</div>',
   ].join('')
 }
@@ -34,7 +34,7 @@ function buildReplyHtml(name: string, catLabel: string, message: string) {
     '<p style="white-space:pre-wrap">' + message + '</p>',
     '</div>',
     '<hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0" />',
-    '<p style="color:#6b7280;font-size:12px">おとなのAI実践ラボ - AI Work Hack<br /><a href="https://hojokindego.com">https://hojokindego.com</a></p>',
+    '<p style="color:#6b7280;font-size:12px">おとなのAI実践ラボ - AI Work Hack<br /><a href="https://hojokin.phtechai.com">https://hojokin.phtechai.com</a></p>',
     '</div>',
   ].join('')
 }

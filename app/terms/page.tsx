@@ -21,7 +21,7 @@ export default function TermsPage() {
           <div className="space-y-8">
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-3">1. 規約への同意</h2>
-              <p className="text-gray-700">補助金でゴー！（hojokindego.com）をご利用いただくことで、本利用規約に同意したものとみなします。同意いただけない場合は、本サービスのご利用をお控えください。</p>
+              <p className="text-gray-700">補助金でゴー！（hojokin.phtechai.com）をご利用いただくことで、本利用規約に同意したものとみなします。同意いただけない場合は、本サービスのご利用をお控えください。</p>
             </section>
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-3">2. サービスの性質</h2>

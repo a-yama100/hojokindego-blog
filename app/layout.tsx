@@ -5,7 +5,7 @@ import './globals.css'
 import { ScrollToTop } from '@/components/ScrollToTop'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.hojokindego.com'),
+  metadataBase: new URL('https://www.hojokin.phtechai.com'),
   title: {
     default: '補助金でゴー！ - 補助金・助成金検索・比較サイト',
     template: '%s | 補助金でゴー！'
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://www.hojokindego.com',
+    url: 'https://www.hojokin.phtechai.com',
     siteName: '補助金でゴー！',
     title: '補助金でゴー！ - 補助金・助成金検索・比較サイト',
     description: '中小企業・個人事業主向けの補助金・助成金を簡単検索・比較。',
@@ -35,10 +35,10 @@ const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: '補助金でゴー！',
-  url: 'https://www.hojokindego.com',
+  url: 'https://www.hojokin.phtechai.com',
   potentialAction: {
     '@type': 'SearchAction',
-    target: { '@type': 'EntryPoint', urlTemplate: 'https://www.hojokindego.com/subsidies?q={search_term_string}' },
+    target: { '@type': 'EntryPoint', urlTemplate: 'https://www.hojokin.phtechai.com/subsidies?q={search_term_string}' },
     'query-input': 'required name=search_term_string',
   },
 }
