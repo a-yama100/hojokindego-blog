@@ -8,5 +8,10 @@
       "path": "/api/cron/expire-subsidies",
       "schedule": "0 3 * * *"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  }
 }

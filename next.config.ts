@@ -10,6 +10,8 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
