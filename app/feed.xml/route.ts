@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 
 export async function GET() {
-  const baseUrl = 'https://hojokin.phtechai.com'
+  const baseUrl = 'https://hojokin.phaiworks.com'
   const siteId = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
   const supabase = createServiceClient()
 
