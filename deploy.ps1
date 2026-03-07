@@ -1,6 +1,14 @@
 ﻿param(
     [Parameter(Mandatory=$true)][string]$Slug,
     [Parameter(Mandatory=$true)][string]$Date,
-    [string]$CommitMessage = ""
+    [string]$CommitMessage = "",
+    [switch]$SkipGitPush
 )
-& "D:\サイト管理\共通スクリプト\deploy.ps1" -Slug $Slug -Date $Date -CommitMessage $CommitMessage -CallerDir $PSScriptRoot
+$params = @{
+    Slug = $Slug
+    Date = $Date
+    CommitMessage = $CommitMessage
+    CallerDir = $PSScriptRoot
+}
+if ($SkipGitPush) { $params["SkipGitPush"] = $true }
+& "D:\サイト管理\共通スクリプト\deploy.ps1" @params
