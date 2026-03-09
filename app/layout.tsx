@@ -26,7 +26,10 @@ export const metadata: Metadata = {
     description: '中小企業・個人事業主向けの補助金・助成金を簡単検索・比較。採択率・締切・ターゲットスコアで最適な補助金を見つけましょう。',
   },
   icons: {
-    icon: [{ url: '/favicon.ico', sizes: 'any' }],
+    icon: [
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' },
+      ],
   },
   robots: { index: true, follow: true },
 }
