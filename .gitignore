@@ -45,3 +45,9 @@ downloads/
 
 .vercel
 .env*.local
+
+# Blog post images (already uploaded to R2)
+_posts/**/*.jpg
+_posts/**/*.png
+_posts/**/*.webp
+_posts/**/*.gif
