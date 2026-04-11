@@ -54,7 +54,7 @@ export function Header() {
         <div className="relative" ref={userMenuRef}>
           <button
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-            className="flex items-center gap-1 p-1.5 rounded-full hover:bg-gray-800 transition-colors"
+            className="flex items-center gap-1 p-1.5 rounded-full hover:bg-gray-800 transition-colors cursor-pointer"
             aria-label="ユーザーメニュー"
           >
             <svg className="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,7 +124,7 @@ export function Header() {
               {/* Search button */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors cursor-pointer"
                 aria-label="検索"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,7 +141,7 @@ export function Header() {
               {/* Mobile search */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-white"
+                className="p-2 text-white cursor-pointer"
                 aria-label="検索"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

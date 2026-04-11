@@ -195,7 +195,7 @@ export default function AdminSupportPage() {
                   <Badge variant="default" size="sm">{selectedUser.plan_type}</Badge>
                   <button
                     onClick={() => setSelectedUser(null)}
-                    className="ml-auto text-gray-400 hover:text-red-500 text-sm"
+                    className="ml-auto text-gray-400 hover:text-red-500 text-sm cursor-pointer"
                     type="button"
                   >
                     Remove
@@ -217,7 +217,7 @@ export default function AdminSupportPage() {
                         <button
                           key={u.id}
                           onClick={() => handleSelectUser(u)}
-                          className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-2 text-sm"
+                          className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-2 text-sm cursor-pointer"
                           type="button"
                         >
                           <span className="font-medium text-gray-900">{u.username}</span>
@@ -296,7 +296,7 @@ export default function AdminSupportPage() {
               key={f.value}
               onClick={() => { setFilter(f.value); setPage(1); }}
               className={
-                "px-3 py-1.5 rounded-lg text-sm font-medium transition " +
+                "px-3 py-1.5 rounded-lg text-sm font-medium transition cursor-pointer " +
                 (filter === f.value
                   ? "bg-green-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200")

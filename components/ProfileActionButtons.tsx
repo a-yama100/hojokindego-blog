@@ -68,7 +68,7 @@ export function ProfileActionButtons({
         type="button"
         onClick={handleLoadProfile}
         disabled={profileLoading || profileLoaded}
-        className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 ${
+        className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed ${
           profileLoaded
             ? 'bg-green-100 text-green-800 border border-green-300'
             : 'bg-green-700 hover:bg-green-800 text-white'
@@ -80,7 +80,7 @@ export function ProfileActionButtons({
         type="button"
         onClick={handleLoadExample}
         disabled={sampleLoaded}
-        className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 ${
+        className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed ${
           sampleLoaded
             ? 'bg-slate-100 text-slate-700 border border-slate-300'
             : 'bg-slate-600 hover:bg-slate-700 text-white'

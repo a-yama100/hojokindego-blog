@@ -24,7 +24,7 @@ export function AISelector({ value, onChange, className = '' }: AISelectorProps)
             key={option.value}
             type="button"
             onClick={() => onChange(option.value)}
-            className={`p-3 rounded-lg border-2 text-center transition-all ${
+            className={`p-3 rounded-lg border-2 text-center transition-all cursor-pointer ${
               value === option.value
                 ? 'border-emerald-700 bg-emerald-50 text-emerald-800'
                 : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
