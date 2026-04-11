@@ -25,7 +25,7 @@ export function CopyButton({ text, buttonText = 'Copy', className = '' }: CopyBu
     <button
       type="button"
       onClick={handleCopy}
-      className={'px-4 py-2 text-sm font-medium rounded-lg transition-colors ' + (copied ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200') + ' ' + className}
+      className={'px-4 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer ' + (copied ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200') + ' ' + className}
     >
       {copied ? 'Copied!' : buttonText}
     </button>

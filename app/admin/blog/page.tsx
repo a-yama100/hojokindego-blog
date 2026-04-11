@@ -322,7 +322,7 @@ export default function AdminBlogPage() {
                   <button onClick={handleSave} disabled={saving} className="cursor-pointer bg-green-700 hover:bg-green-800 text-white py-2 px-6 rounded-lg font-medium transition-colors disabled:opacity-50">
                     {saving ? '保存中...' : (editing ? '更新する' : '作成する')}
                   </button>
-                  <button onClick={() => setShowForm(false)} className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-6 rounded-lg font-medium transition-colors">
+                  <button onClick={() => setShowForm(false)} className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-6 rounded-lg font-medium transition-colors cursor-pointer">
                     キャンセル
                   </button>
                 </div>
@@ -369,14 +369,14 @@ export default function AdminBlogPage() {
                       <td className="px-4 py-3">
                         <div className="flex gap-2 flex-wrap">
                           {post.deleted_at ? (
-                            <button onClick={() => handleRestore(post.id)} className="text-xs px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200">復元</button>
+                            <button onClick={() => handleRestore(post.id)} className="text-xs px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 cursor-pointer">復元</button>
                           ) : (
                             <>
-                              <button onClick={() => handleEdit(post.id)} className="text-xs px-3 py-1 rounded bg-gray-100 text-gray-700 hover:bg-gray-200">編集</button>
-                              <button onClick={() => handleTogglePublish(post.id, post.is_published)} className="text-xs px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200">
+                              <button onClick={() => handleEdit(post.id)} className="text-xs px-3 py-1 rounded bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer">編集</button>
+                              <button onClick={() => handleTogglePublish(post.id, post.is_published)} className="text-xs px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 cursor-pointer">
                                 {post.is_published ? '非公開' : '公開'}
                               </button>
-                              <button onClick={() => handleDelete(post.id, post.title)} className="text-xs px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200">削除</button>
+                              <button onClick={() => handleDelete(post.id, post.title)} className="text-xs px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 cursor-pointer">削除</button>
                             </>
                           )}
                         </div>

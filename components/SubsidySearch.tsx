@@ -145,7 +145,7 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
             className="px-6 py-2 bg-emerald-700 text-white font-bold rounded-lg hover:bg-emerald-800 transition-colors disabled:opacity-50 text-sm">
             {loading ? "検索中..." : "検索"}</button>
           <button onClick={reset}
-            className="px-6 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition-colors text-sm">
+            className="px-6 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition-colors text-sm cursor-pointer">
             {"リセット"}</button>
         </div>
       </div>
