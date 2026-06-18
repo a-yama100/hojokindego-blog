@@ -57,7 +57,7 @@ export default async function SubsidyDetailPage({ params }: { params: Promise<{ 
           <div className="flex justify-start mb-6">
             <Link href="/subsidies"><Button variant="outline" size="sm">{"\u4e00\u89a7\u306b\u623b\u308b"}</Button></Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className={'border-2 rounded-xl p-4 text-center ' + scoreBg}>
               <p className="text-xs text-gray-500 mb-1">{"\u30bf\u30fc\u30b2\u30c3\u30c8\u30b9\u30b3\u30a2"}</p>
               <p className={'text-3xl font-bold ' + scoreColor}>{score}</p>
