@@ -119,9 +119,50 @@ async function uploadToR2(filePath, r2Key) {
       });
     });
     req.on('error', reject);
+    // Convert a stalled socket into a (retryable) timeout error instead of hanging forever.
+    req.setTimeout(30000, () => {
+      const e = new Error('R2 upload timed out for ' + r2Key);
+      e.code = 'ETIMEDOUT';
+      req.destroy(e);
+    });
     req.write(fileContent);
     req.end();
   });
+}
+
+// R2 / Cloudflare occasionally resets a connection mid-upload (read ECONNRESET).
+// Retry transient network failures (resets / timeouts / 5xx) with exponential backoff;
+// a single retry almost always succeeds. Non-transient errors (auth, 4xx) fail fast.
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function isTransientUploadError(err) {
+  const code = (err && err.code) || '';
+  const msg = (err && err.message) || '';
+  const transientCodes = ['ECONNRESET', 'ETIMEDOUT', 'ECONNREFUSED', 'EPIPE', 'EAI_AGAIN', 'ENOTFOUND', 'ESOCKETTIMEDOUT'];
+  if (transientCodes.includes(code)) return true;
+  if (/socket hang up|ECONNRESET|timed out|timeout|EPIPE/i.test(msg)) return true;
+  if (/R2 upload failed \((408|429|500|502|503|504)\)/.test(msg)) return true;
+  return false;
+}
+
+async function uploadToR2WithRetry(filePath, r2Key, maxAttempts = 5) {
+  let lastErr;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await uploadToR2(filePath, r2Key);
+    } catch (err) {
+      lastErr = err;
+      if (attempt < maxAttempts && isTransientUploadError(err)) {
+        const backoff = Math.min(1000 * Math.pow(2, attempt - 1), 8000); // 1s, 2s, 4s, 8s
+        console.warn('  Upload attempt ' + attempt + '/' + maxAttempts + ' for ' + r2Key +
+          ' failed (' + (err.code || err.message) + '). Retrying in ' + backoff + 'ms...');
+        await sleep(backoff);
+        continue;
+      }
+      throw lastErr;
+    }
+  }
+  throw lastErr;
 }
 
 // Parse frontmatter from post.md
@@ -201,7 +242,7 @@ async function publishPost(postFolder) {
       console.log('Uploading:', img);
       const r2Key = 'blog/' + frontmatter.slug + '/' + img;
       try {
-        const url = await uploadToR2(imgPath, r2Key);
+        const url = await uploadToR2WithRetry(imgPath, r2Key);
         uploadedImages[img] = url;
         console.log('Uploaded:', url);
 
