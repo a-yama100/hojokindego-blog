@@ -12,8 +12,18 @@ interface MarkdownDisplayProps {
 function preprocessMarkdown(content: string): string {
   let processed = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
   // Fix bold for Japanese text: CommonMark sometimes fails when closing **
-  // is followed by Japanese chars without word boundary (e.g. **text**followed)
-  processed = processed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  // is followed by Japanese chars without word boundary (e.g. **text**followed).
+  // Process block-by-block (split on blank lines) so a single unmatched "**"
+  // in one block can't mis-pair markers in every block that follows it
+  // (2026-09-27: a stray "**" was leaking into rendered pages downstream).
+  processed = processed
+    .split('\n\n')
+    .map((block) => {
+      const starCount = (block.match(/\*\*/g) || []).length
+      if (starCount % 2 !== 0) return block
+      return block.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    })
+    .join('\n\n')
   return processed
 }
 
