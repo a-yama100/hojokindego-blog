@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { attributionRows, type Attribution } from '@/lib/attribution'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'mail@a-yama.jp'
 
-function buildAdminHtml(name: string, email: string, catLabel: string, message: string) {
+function buildAdminHtml(name: string, email: string, catLabel: string, message: string, attribution?: unknown) {
   return [
     '<div style="font-family:sans-serif;max-width:600px;margin:0 auto">',
     '<h2 style="color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:8px">新しいお問い合わせ</h2>',
@@ -12,6 +13,7 @@ function buildAdminHtml(name: string, email: string, catLabel: string, message: 
     '<tr><td style="padding:8px 12px;background:#f3f4f6;font-weight:bold;width:120px">お名前</td><td style="padding:8px 12px">' + name + '</td></tr>',
     '<tr><td style="padding:8px 12px;background:#f3f4f6;font-weight:bold">メール</td><td style="padding:8px 12px">' + email + '</td></tr>',
     '<tr><td style="padding:8px 12px;background:#f3f4f6;font-weight:bold">カテゴリ</td><td style="padding:8px 12px">' + catLabel + '</td></tr>',
+    attributionRows(attribution as Partial<Attribution> | null),
     '</table>',
     '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin:16px 0">',
     '<h3 style="margin-top:0;color:#374151">お問い合わせ内容</h3>',
@@ -41,7 +43,7 @@ function buildReplyHtml(name: string, catLabel: string, message: string) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, category, message } = await request.json()
+    const { name, email, category, message, attribution } = await request.json()
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
       to: CONTACT_EMAIL,
       replyTo: email,
       subject: '\u3010お問い合わせ\u3011' + catLabel + ' - ' + name,
-      html: buildAdminHtml(name, email, catLabel, message),
+      html: buildAdminHtml(name, email, catLabel, message, attribution),
     })
 
     // Send auto-reply to user

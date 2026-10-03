@@ -10,6 +10,7 @@ import { FormSelect } from '@/components/FormSelect'
 import { LoadingButton } from '@/components/LoadingButton'
 import { ErrorDisplay } from '@/components/ErrorDisplay'
 import { PageHero } from '@/components/PageHero'
+import { getAttribution, trackConversion } from '@/lib/attribution'
 
 const categories = [
   { value: '', label: '選択してください' },
@@ -45,7 +46,7 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, category, message }),
+        body: JSON.stringify({ name, email, category, message, attribution: getAttribution() }),
       })
 
       const data = await res.json()
@@ -54,6 +55,7 @@ export default function ContactPage() {
         throw new Error(data.error || '送信に失敗しました')
       }
 
+      trackConversion('generate_lead', { form: 'contact', category })
       setSuccess(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : '送信に失敗しました')

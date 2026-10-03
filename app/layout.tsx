@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { AuthProvider } from '@/contexts/AuthContext'
 import './globals.css'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { AttributionCapture } from '@/components/AttributionCapture'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hojokin.phaiworks.com'),
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       </head>
       <body className={'font-sans antialiased bg-white text-gray-900'}>
+        <AttributionCapture />
         <AuthProvider>
           {children}
           <ScrollToTop />

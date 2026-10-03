@@ -10,6 +10,7 @@ import { FormInput } from '@/components/FormInput'
 import { LoadingButton } from '@/components/LoadingButton'
 import { ErrorDisplay } from '@/components/ErrorDisplay'
 import { signUp } from '@/lib/auth'
+import { trackConversion } from '@/lib/attribution'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -39,6 +40,7 @@ export default function SignupPage() {
 
     try {
       await signUp(email, password, redirectTo)
+      trackConversion('sign_up', { method: 'email' })
       setSuccess(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : '登録に失敗しました')
