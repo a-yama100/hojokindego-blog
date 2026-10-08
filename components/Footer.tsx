@@ -32,7 +32,6 @@ export function Footer() {
               <li><Link href="/blog" className="text-gray-400 hover:text-white transition-colors">ブログ</Link></li>
               <li><Link href="/subsidies" className="text-gray-400 hover:text-white transition-colors">補助金検索</Link></li>
               <li><Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">プラン</Link></li>
-              <li><Link href="/support" className="text-gray-400 hover:text-white transition-colors">サポート</Link></li>
               <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">運営者</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors">お問い合わせ</Link></li>
             </ul>
@@ -42,7 +41,6 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/terms" className="text-gray-400 hover:text-white transition-colors">利用規約</Link></li>
               <li><Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">プライバシーポリシー</Link></li>
-              <li><Link href="/legal" className="text-gray-400 hover:text-white transition-colors">特定商取引法に基づく表記</Link></li>
               <li><a href="/sitemap.xml" className="text-gray-400 hover:text-white transition-colors">サイトマップ</a></li>
               <li><a href="/feed.xml" className="text-gray-400 hover:text-white transition-colors">RSSフィード</a></li>
             </ul>

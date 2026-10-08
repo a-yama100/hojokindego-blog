@@ -134,7 +134,6 @@ export function Header() {
 
               <Link href="/subsidies" className={navLinkClass}>ツール</Link>
               <Link href="/blog" className={navLinkClass}>ブログ</Link>
-              <Link href="/support" className={navLinkClass}>サポート</Link>
               {renderAuthDesktop()}
             </nav>
             <div className="flex items-center gap-2 nav:hidden">
@@ -168,7 +167,6 @@ export function Header() {
               <div className="flex flex-col space-y-2">
                 <Link href="/subsidies" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>ツール</Link>
                 <Link href="/blog" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>ブログ</Link>
-                <Link href="/support" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>サポート</Link>
                 {renderAuthMobile()}
               </div>
             </nav>
