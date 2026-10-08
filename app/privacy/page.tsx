@@ -5,6 +5,7 @@ import { Container } from '@/components/Container'
 
 export const metadata: Metadata = {
   title: 'プライバシーポリシー | 補助金でゴー！',
+  alternates: { canonical: '/privacy' },
 }
 
 export default function PrivacyPage() {

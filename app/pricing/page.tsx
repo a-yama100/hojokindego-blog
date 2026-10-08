@@ -12,6 +12,7 @@ import { PageHero } from '@/components/PageHero'
 export const metadata: Metadata = {
   title: '会員プラン',
   description: '補助金でゴー！の会員プラン。無料で始めて、あなたのペースに合わせてアップグレード。',
+  alternates: { canonical: '/pricing' },
 }
 
 const plans = [

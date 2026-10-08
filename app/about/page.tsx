@@ -7,6 +7,7 @@ import { SectionHeader } from '@/components/SectionHeader'
 export const metadata: Metadata = {
   title: '運営者について | 補助金でゴー！',
   description: '補助金でゴー！の運営者情報とサービス概要。',
+  alternates: { canonical: '/about' },
 }
 
 export default function AboutPage() {

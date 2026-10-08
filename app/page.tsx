@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -23,6 +24,10 @@ const ministries = [
   { name: 'デジタル庁', full: 'デジタル庁', focus: 'DX・デジタル化・IT活用' },
   { name: '地方自治体', full: '都道府県・市区町村', focus: '地域限定の補助金プログラム' },
 ]
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 export default function Home() {
   return (

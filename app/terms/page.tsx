@@ -5,6 +5,7 @@ import { Container } from '@/components/Container'
 
 export const metadata: Metadata = {
   title: '利用規約 | 補助金でゴー！',
+  alternates: { canonical: '/terms' },
 }
 
 export default function TermsPage() {

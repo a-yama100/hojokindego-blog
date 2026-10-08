@@ -15,6 +15,7 @@ import { AdBanner } from '@/components/AdBanner'
 export const metadata: Metadata = {
   title: 'ブログ',
   description: '補助金・助成金の最新情報や申請のコツ、採択率を上げるノウハウを発信。',
+  alternates: { canonical: '/blog' },
 }
 
 export const revalidate = 60

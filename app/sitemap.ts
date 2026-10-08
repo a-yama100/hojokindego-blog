@@ -24,22 +24,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: baseUrl + '/tools',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
       url: baseUrl + '/pricing',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
-    },
-    {
-      url: baseUrl + '/downloads',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
     },
     {
       url: baseUrl + '/contact',
@@ -49,27 +37,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  let toolPages: MetadataRoute.Sitemap = []
-  try {
-    const supabase = createServiceClient()
-    const { data: tools } = await supabase
-      .from('tools')
-      .select('tool_id')
-      .eq('is_active', true)
-      .gte('tool_id', 'T00005')
-      .order('tool_id')
-
-    if (tools) {
-      toolPages = tools.map((tool: any) => ({
-        url: baseUrl + '/tools/' + tool.tool_id,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      }))
-    }
-  } catch (error) {
-    console.error('Sitemap: Failed to fetch tools', error)
-  }
+  // 2026-10-08: tools テーブル由来の /tools/T000xx（このサイトに該当ページがなく404）と、
+  // /tools・/downloads（ページなし・404）は sitemap に載せない。実在するのは /tools/matching と /tools/review だけ。
 
   let blogPages: MetadataRoute.Sitemap = []
   try {
@@ -94,5 +63,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Sitemap: Failed to fetch blog posts', error)
   }
 
-  return [...staticPages, ...toolPages, ...blogPages]
+  return [...staticPages, ...blogPages]
 }
