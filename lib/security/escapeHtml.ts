@@ -16,5 +16,5 @@ export function headerSafe(value: unknown, max = 120): string {
 
 // <script type="application/ld+json"> に入れる JSON。文字列中の </script> で抜けられないようにする。
 export function jsonLd(data: unknown): string {
-  return JSON.stringify(data).replace(/</g, "\u003c").replace(/>/g, "\u003e").replace(/&/g, "\u0026")
+  return JSON.stringify(data).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026")
 }
