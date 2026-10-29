@@ -67,6 +67,7 @@ export function trackConversion(name: string, params: Record<string, unknown> = 
     first_touch_source: a?.source,
     first_touch_medium: a?.medium,
     first_touch_campaign: a?.campaign,
+    first_touch_landing: a?.landing,
   })
 }
 
