@@ -4,7 +4,7 @@ import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
 
 export const metadata: Metadata = {
-  title: '利用規約 | 補助金でゴー！',
+  title: '利用規約',
   alternates: { canonical: '/terms' },
 }
 

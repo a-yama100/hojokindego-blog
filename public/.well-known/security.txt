@@ -1,0 +1,4 @@
+Contact: mailto:contact@hojokin.phaiworks.com
+Expires: 2027-10-30T00:00:00.000Z
+Preferred-Languages: ja
+Canonical: https://hojokin.phaiworks.com/.well-known/security.txt

@@ -4,6 +4,7 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import './globals.css'
 import { ScrollToTop } from '@/components/ScrollToTop'
 import { AttributionCapture } from '@/components/AttributionCapture'
+import { jsonLd } from '@/lib/security/escapeHtml'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hojokin.phaiworks.com'),
@@ -53,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ja">
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd) }} />
       </head>
       <body className={'font-sans antialiased bg-white text-gray-900'}>
         <AttributionCapture />

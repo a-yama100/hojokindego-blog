@@ -3,10 +3,8 @@ Allow: /
 
 Disallow: /api/
 Disallow: /mypage/
-Disallow: /login
-Disallow: /signup
 
-Sitemap: https://www.ai-workhack.com/sitemap.xml
+Sitemap: https://hojokin.phaiworks.com/sitemap.xml
 
 # RSS Feed
-RSS: https://www.ai-workhack.com/feed.xml
+RSS: https://hojokin.phaiworks.com/feed.xml

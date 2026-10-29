@@ -54,11 +54,14 @@ export default function ForgotPasswordPage() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  maxLength={254}
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your-email@example.com"
+                  placeholder="you@example.com"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>

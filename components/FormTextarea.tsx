@@ -1,4 +1,5 @@
-import { TextareaHTMLAttributes } from 'react'
+import { TextareaHTMLAttributes, useId } from 'react'
+import { FIELD_LIMITS } from '@/lib/security/limits'
 
 interface FormTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
   label?: string
@@ -6,16 +7,20 @@ interface FormTextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElem
   onChange?: (value: string) => void
 }
 
-export function FormTextarea({ label, error, onChange, className = '', ...props }: FormTextareaProps) {
+export function FormTextarea({ label, error, onChange, className = '', id, ...props }: FormTextareaProps) {
+  const autoId = useId()
+  const inputId = id || autoId
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 mb-1">
           {label}
           {props.required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
       <textarea
+        id={inputId}
+        maxLength={FIELD_LIMITS.message}
         className={'w-full px-4 py-2 border rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-y min-h-[100px] ' + (error ? 'border-red-500' : 'border-gray-300') + ' ' + className}
         onChange={(e) => onChange?.(e.target.value)}
         {...props}

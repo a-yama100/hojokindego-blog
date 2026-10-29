@@ -11,6 +11,7 @@ import { LoadingButton } from '@/components/LoadingButton'
 import { ErrorDisplay } from '@/components/ErrorDisplay'
 import { signUp } from '@/lib/auth'
 import { trackConversion } from '@/lib/attribution'
+import { ConsentCheckbox } from '@/components/ConsentCheckbox'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -20,6 +21,7 @@ export default function SignupPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [consent, setConsent] = useState(false)
   const redirectTo = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('redirect') || '/' : '/'
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,6 +35,11 @@ export default function SignupPage() {
 
     if (password.length < 8) {
       setError('パスワードは8文字以上で入力してください')
+      return
+    }
+
+    if (!consent) {
+      setError('利用規約・プライバシーポリシーへの同意が必要です')
       return
     }
 
@@ -86,16 +93,21 @@ export default function SignupPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <FormInput
                 label="メールアドレス"
+                name="email"
                 type="email"
+                autoComplete="email"
                 value={email}
                 onChange={setEmail}
                 required
-                placeholder="example@email.com"
+                placeholder="you@example.com"
               />
 
               <FormInput
                 label="パスワード"
+                name="new-password"
                 type="password"
+                autoComplete="new-password"
+                minLength={8}
                 value={password}
                 onChange={setPassword}
                 required
@@ -104,12 +116,17 @@ export default function SignupPage() {
 
               <FormInput
                 label="パスワード（確認）"
+                name="confirm-password"
                 type="password"
+                autoComplete="new-password"
+                minLength={8}
                 value={confirmPassword}
                 onChange={setConfirmPassword}
                 required
                 placeholder="もう一度入力"
               />
+
+              <ConsentCheckbox checked={consent} onChange={setConsent} />
 
               <LoadingButton
                 type="submit"

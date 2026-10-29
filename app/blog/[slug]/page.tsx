@@ -10,6 +10,7 @@ import { Sidebar } from '@/components/Sidebar'
 import { RelatedPosts } from '@/components/RelatedPosts'
 import { BlogRelatedTools } from '@/components/BlogRelatedTools'
 import { AuthorBio } from '@/components/AuthorBio'
+import { jsonLd } from '@/lib/security/escapeHtml'
 
 
 export const revalidate = 60
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: post.title + '| 補助金でゴー！',
+    title: post.title,
     description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
     openGraph: {
       title: post.title + '| 補助金でゴー！',
@@ -83,16 +84,16 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'a-yama',
-      url: 'https://www.ai-workhack.com/about',
+      url: 'https://hojokin.phaiworks.com/about',
     },
     publisher: {
       '@type': 'Organization',
       name: '補助金でゴー！',
-      url: 'https://www.ai-workhack.com',
+      url: 'https://hojokin.phaiworks.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://www.ai-workhack.com/blog/${slug}`,
+      '@id': `https://hojokin.phaiworks.com/blog/${slug}`,
     },
   }
 
@@ -100,7 +101,7 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
       <Header />
       <div className="min-h-screen bg-gray-50">

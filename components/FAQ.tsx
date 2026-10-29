@@ -1,4 +1,5 @@
 'use client'
+import { jsonLd as toJsonLd } from '@/lib/security/escapeHtml'
 
 interface FAQItem {
   question: string
@@ -56,7 +57,7 @@ export function FAQJsonLd({ items }: FAQJsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }}
     />
   )
 }

@@ -86,16 +86,20 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <FormInput
                 label="メールアドレス"
+                name="email"
                 type="email"
+                autoComplete="email"
                 value={email}
                 onChange={setEmail}
                 required
-                placeholder="example@email.com"
+                placeholder="you@example.com"
               />
 
               <FormInput
                 label="パスワード"
+                name="password"
                 type="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={setPassword}
                 required

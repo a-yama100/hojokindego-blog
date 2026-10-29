@@ -5,7 +5,7 @@ import { Container } from '@/components/Container'
 import { SectionHeader } from '@/components/SectionHeader'
 
 export const metadata: Metadata = {
-  title: '運営者について | 補助金でゴー！',
+  title: '運営者について',
   description: '補助金でゴー！の運営者情報とサービス概要。',
   alternates: { canonical: '/about' },
 }

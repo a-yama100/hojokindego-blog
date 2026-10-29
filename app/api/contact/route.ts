@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { attributionRows, type Attribution } from '@/lib/attribution'
+import { escapeHtml, headerSafe } from '@/lib/security/escapeHtml'
+import { overLimit } from '@/lib/security/limits'
+import { rateLimit, clientIp, TOO_MANY } from '@/lib/security/rateLimit'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'mail@a-yama.jp'
@@ -43,9 +46,9 @@ function buildReplyHtml(name: string, catLabel: string, message: string) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, category, message, attribution } = await request.json()
+    const { name: rawName, email, category: rawCategory, message: rawMessage, consent, attribution } = await request.json()
 
-    if (!name || !email || !message) {
+    if (!rawName || !email || !rawMessage) {
       return NextResponse.json(
         { error: '必須項目が入力されていません' },
         { status: 400 }
@@ -60,15 +63,30 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const catLabel = category || '一般'
+    if (overLimit({ name: rawName, email, category: rawCategory, message: rawMessage })) {
+      return NextResponse.json({ error: '入力が長すぎます' }, { status: 400 })
+    }
+    if (consent !== true) {
+      return NextResponse.json({ error: 'プライバシーポリシーへの同意が必要です' }, { status: 400 })
+    }
+    // 回数制限: 同じ IP から 10 分に 5 回まで。自動返信を他人宛に送り付ける使い方を防ぐため、同じ宛先へも 1 時間に 3 回まで。
+    const ip = clientIp(request)
+    if (!(await rateLimit('contact:ip:' + ip, 600, 5)) || !(await rateLimit('contact:to:' + String(email).toLowerCase(), 3600, 3))) {
+      return NextResponse.json(TOO_MANY, { status: 429 })
+    }
+
+    // メール本文は HTML なので、入力は必ず変換してから埋め込む（自社のドメインから任意の HTML を送らせない）
+    const name = escapeHtml(rawName)
+    const message = escapeHtml(rawMessage)
+    const catLabel = escapeHtml(rawCategory || '一般')
 
     // Send notification to admin
     await resend?.emails.send({
       from: 'おとなのAI実践ラボ <onboarding@resend.dev>',
       to: CONTACT_EMAIL,
       replyTo: email,
-      subject: '\u3010お問い合わせ\u3011' + catLabel + ' - ' + name,
-      html: buildAdminHtml(name, email, catLabel, message, attribution),
+      subject: headerSafe('\u3010お問い合わせ\u3011' + (rawCategory || '一般') + ' - ' + rawName),
+      html: buildAdminHtml(name, escapeHtml(email), catLabel, message, attribution),
     })
 
     // Send auto-reply to user

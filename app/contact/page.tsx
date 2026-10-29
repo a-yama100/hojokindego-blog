@@ -11,6 +11,7 @@ import { LoadingButton } from '@/components/LoadingButton'
 import { ErrorDisplay } from '@/components/ErrorDisplay'
 import { PageHero } from '@/components/PageHero'
 import { getAttribution, trackConversion } from '@/lib/attribution'
+import { ConsentCheckbox } from '@/components/ConsentCheckbox'
 
 const categories = [
   { value: '', label: '選択してください' },
@@ -30,6 +31,7 @@ export default function ContactPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [consent, setConsent] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,6 +41,10 @@ export default function ContactPage() {
       setError('お名前、メールアドレス、お問い合わせ内容は必須です')
       return
     }
+    if (!consent) {
+      setError('プライバシーポリシーへの同意が必要です')
+      return
+    }
 
     setLoading(true)
 
@@ -46,7 +52,7 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, category, message, attribution: getAttribution() }),
+        body: JSON.stringify({ name, email, category, message, consent, attribution: getAttribution() }),
       })
 
       const data = await res.json()
@@ -105,6 +111,9 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <FormInput
                   label="お名前"
+                  name="name"
+                  autoComplete="name"
+                  maxLength={100}
                   value={name}
                   onChange={setName}
                   required
@@ -113,15 +122,17 @@ export default function ContactPage() {
 
                 <FormInput
                   label="メールアドレス"
+                  name="email"
                   type="email"
                   value={email}
                   onChange={setEmail}
                   required
-                  placeholder="example@email.com"
+                  placeholder="you@example.com"
                 />
 
                 <FormSelect
                   label="お問い合わせカテゴリ"
+                  name="category"
                   options={categories}
                   value={category}
                   onChange={setCategory}
@@ -129,12 +140,15 @@ export default function ContactPage() {
 
                 <FormTextarea
                   label="お問い合わせ内容"
+                  name="message"
                   value={message}
                   onChange={setMessage}
                   required
                   placeholder="お問い合わせ内容をご記入ください"
                   rows={6}
                 />
+
+                <ConsentCheckbox checked={consent} onChange={setConsent} />
 
                 <LoadingButton
                   type="submit"
