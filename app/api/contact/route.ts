@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import { sendBrevoEmail } from '@/lib/email/sendEmail'
 import { attributionRows, type Attribution } from '@/lib/attribution'
 import { escapeHtml, headerSafe } from '@/lib/security/escapeHtml'
 import { overLimit } from '@/lib/security/limits'
 import { rateLimit, clientIp, TOO_MANY } from '@/lib/security/rateLimit'
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'mail@a-yama.jp'
 
 function buildAdminHtml(name: string, email: string, catLabel: string, message: string, attribution?: unknown) {
@@ -39,7 +38,7 @@ function buildReplyHtml(name: string, catLabel: string, message: string) {
     '<p style="white-space:pre-wrap">' + message + '</p>',
     '</div>',
     '<hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0" />',
-    '<p style="color:#6b7280;font-size:12px">おとなのAI実践ラボ - AI Work Hack<br /><a href="https://hojokin.phaiworks.com">https://hojokin.phaiworks.com</a></p>',
+    '<p style="color:#6b7280;font-size:12px">補助金でゴー！<br /><a href="https://hojokin.phaiworks.com">https://hojokin.phaiworks.com</a></p>',
     '</div>',
   ].join('')
 }
@@ -81,19 +80,22 @@ export async function POST(request: NextRequest) {
     const catLabel = escapeHtml(rawCategory || '一般')
 
     // Send notification to admin
-    await resend?.emails.send({
-      from: 'おとなのAI実践ラボ <onboarding@resend.dev>',
+    const notified = await sendBrevoEmail({
       to: CONTACT_EMAIL,
       replyTo: email,
       subject: headerSafe('\u3010お問い合わせ\u3011' + (rawCategory || '一般') + ' - ' + rawName),
       html: buildAdminHtml(name, escapeHtml(email), catLabel, message, attribution),
     })
+    // 通知が届かないときは、受け付けたことにしない（お問い合わせが消えないように、送った人に再送を頼む）
+    if (!notified.ok) {
+      return NextResponse.json({ error: '送信に失敗しました。時間をおいて再度お試しください。' }, { status: 500 })
+    }
 
     // Send auto-reply to user
-    await resend?.emails.send({
-      from: 'おとなのAI実践ラボ <onboarding@resend.dev>',
+    await sendBrevoEmail({
       to: email,
-      subject: '\u3010おとなのAI実践ラボ\u3011お問い合わせを受け付けました',
+      replyTo: CONTACT_EMAIL,
+      subject: '【補助金でゴー！】お問い合わせを受け付けました',
       html: buildReplyHtml(name, catLabel, message),
     })
 
