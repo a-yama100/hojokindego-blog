@@ -47,10 +47,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   return {
     title: post.title,
-    description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
+    description: post.description || post.title,
     openGraph: {
       title: post.title + '| 補助金でゴー！',
-      description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
+      description: post.description || post.title,
       type: 'article',
       publishedTime: post.published_at || undefined,
       modifiedTime: post.updated_at || undefined,
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: post.title + '| 補助金でゴー！',
-      description: (post.description || '') + ' | 補助金でゴー！ - 55歳からのAI副収入',
+      description: post.description || post.title,
       images: post.thumbnail_url ? [post.thumbnail_url] : undefined,
     },
   }
