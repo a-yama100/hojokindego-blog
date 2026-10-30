@@ -26,7 +26,7 @@ export function FormInput({ label, error, onChange, className = '', id, ...props
       <input
         id={inputId}
         autoComplete={AUTO[type]}
-        maxLength={MAX[type] ?? FIELD_LIMITS.subject}
+        maxLength={MAX[type] ?? FIELD_LIMITS.url}
         className={'w-full px-4 py-2 border rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ' + (error ? 'border-red-500' : 'border-gray-300') + ' ' + className}
         onChange={(e) => onChange?.(e.target.value)}
         {...props}
