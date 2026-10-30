@@ -94,14 +94,14 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">{"キーワード"}</label>
-            <input type="text" value={keyword} onChange={e => setKeyword(e.target.value)}
+            <input aria-label="キーワード" maxLength={2048} type="text" value={keyword} onChange={e => setKeyword(e.target.value)}
               placeholder={"補助金名、業種など"}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               onKeyDown={e => e.key === 'Enter' && doSearch()} />
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">{"カテゴリ"}</label>
-            <select value={category} onChange={e => setCategory(e.target.value)}
+            <select aria-label="カテゴリ" value={category} onChange={e => setCategory(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white text-sm">
               <option value="">{"すべて"}</option>
               {Object.entries(CATEGORIES).map(([k, v]) => (<option key={k} value={k}>{v.label}</option>))}
@@ -109,7 +109,7 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">{"地域"}</label>
-            <select value={region} onChange={e => setRegion(e.target.value)}
+            <select aria-label="地域" value={region} onChange={e => setRegion(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white text-sm">
               <option value="">{"すべて"}</option>
               {Object.entries(REGIONS).map(([k, v]) => (<option key={k} value={k}>{v}</option>))}
@@ -117,7 +117,7 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">{"難易度"}</label>
-            <select value={difficulty} onChange={e => setDifficulty(e.target.value)}
+            <select aria-label="難易度" value={difficulty} onChange={e => setDifficulty(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white text-sm">
               <option value="">{"すべて"}</option>
               <option value={"簡単"}>{"簡単"}</option>
@@ -127,14 +127,14 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">{"最低金額"}</label>
-            <select value={minAmount} onChange={e => setMinAmount(e.target.value)}
+            <select aria-label="最低金額" value={minAmount} onChange={e => setMinAmount(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white text-sm">
               {AMOUNT_OPTIONS.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
             </select>
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">{"並び替え"}</label>
-            <select value={sort} onChange={e => setSort(e.target.value)}
+            <select aria-label="並び替え" value={sort} onChange={e => setSort(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white text-sm">
               {SORT_OPTIONS.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
             </select>

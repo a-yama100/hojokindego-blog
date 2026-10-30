@@ -71,32 +71,32 @@ export default function NewPostPage() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
-              <input type="text" value={formData.title}
+              <input aria-label="Title" maxLength={2048} type="text" value={formData.title}
                 onChange={(e) => { const t = e.target.value; setFormData({...formData, title: t, slug: formData.slugManual ? formData.slug : generateSlug(t)}) }}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
-              <input type="text" value={formData.slug}
+              <input aria-label="Slug" maxLength={2048} type="text" value={formData.slug}
                 onChange={(e) => setFormData({...formData, slug: e.target.value, slugManual: true})}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea value={formData.description}
+              <textarea aria-label="Description" maxLength={100000} value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
                 rows={2} className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Content * (Markdown)</label>
-              <textarea value={formData.content}
+              <textarea aria-label="Content * (Markdown)" maxLength={100000} value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
                 rows={20} className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-mono text-sm" required />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                <select value={formData.category}
+                <select aria-label="Category" value={formData.category}
                   onChange={(e) => setFormData({...formData, category: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900">
                   <option value="">-- Select --</option>
@@ -105,7 +105,7 @@ export default function NewPostPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Access Level</label>
-                <select value={formData.access_level}
+                <select aria-label="Access Level" value={formData.access_level}
                   onChange={(e) => setFormData({...formData, access_level: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900">
                   <option value="free">Free</option>
@@ -115,7 +115,7 @@ export default function NewPostPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Thumbnail URL</label>
-                <input type="text" value={formData.thumbnail_url}
+                <input aria-label="Thumbnail URL" maxLength={2048} type="text" value={formData.thumbnail_url}
                   onChange={(e) => setFormData({...formData, thumbnail_url: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900" placeholder="https://..." />
               </div>

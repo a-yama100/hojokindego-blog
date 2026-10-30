@@ -203,7 +203,7 @@ export default function AdminSupportPage() {
                 </div>
               ) : (
                 <div className="relative">
-                  <input
+                  <input aria-label="Search by username or email (min 2 chars)..." maxLength={2048}
                     type="text"
                     value={userSearch}
                     onChange={(e) => setUserSearch(e.target.value)}
@@ -234,7 +234,7 @@ export default function AdminSupportPage() {
             <form onSubmit={handleSendDm}>
               <div className="mb-3">
                 <label className="block text-xs font-medium text-gray-700 mb-1">Category</label>
-                <select
+                <select aria-label="Category"
                   value={dmCategory}
                   onChange={(e) => setDmCategory(e.target.value)}
                   className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white text-gray-900"
@@ -247,7 +247,7 @@ export default function AdminSupportPage() {
 
               <div className="mb-3">
                 <label className="block text-xs font-medium text-gray-700 mb-1">Title</label>
-                <input
+                <input aria-label="Title"
                   type="text"
                   value={dmTitle}
                   onChange={(e) => setDmTitle(e.target.value)}
@@ -260,7 +260,7 @@ export default function AdminSupportPage() {
 
               <div className="mb-3">
                 <label className="block text-xs font-medium text-gray-700 mb-1">Message</label>
-                <textarea
+                <textarea aria-label="Message"
                   value={dmBody}
                   onChange={(e) => setDmBody(e.target.value)}
                   required

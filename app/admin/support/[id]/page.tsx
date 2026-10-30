@@ -129,7 +129,7 @@ export default function AdminAnswerPage() {
           {error && <p className="text-sm text-red-600 mb-2">{error}</p>}
           {success && <p className="text-sm text-green-600 mb-2">{success}</p>}
           <form onSubmit={handleSubmit}>
-            <textarea value={answerBody} onChange={(e) => setAnswerBody(e.target.value)}
+            <textarea aria-label="回答を入力してください...（マークダウン対応）" maxLength={100000} value={answerBody} onChange={(e) => setAnswerBody(e.target.value)}
               placeholder="回答を入力してください...（マークダウン対応）" rows={8} required
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white text-gray-900 resize-vertical" />
             <div className="mt-3 flex justify-end">

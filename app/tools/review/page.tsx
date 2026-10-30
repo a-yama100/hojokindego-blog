@@ -45,7 +45,7 @@ export default function ReviewToolPage() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">補助金名（任意）</label>
-              <input
+              <input aria-label="補助金名（任意）" maxLength={2048}
                 type="text"
                 value={subsidyName}
                 onChange={e => setSubsidyName(e.target.value)}
@@ -55,7 +55,7 @@ export default function ReviewToolPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">申請書テキスト <span className="text-red-500">*</span></label>
-              <textarea
+              <textarea aria-label="申請書テキスト" maxLength={100000}
                 value={text}
                 onChange={e => setText(e.target.value)}
                 rows={12}

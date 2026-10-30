@@ -88,21 +88,21 @@ export default function MatchingToolPage() {
             <div className="grid md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">業種 <span className="text-red-500">*</span></label>
-                <select value={industry} onChange={e => setIndustry(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                <select aria-label="業種" value={industry} onChange={e => setIndustry(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
                   <option value="">選択してください</option>
                   {INDUSTRIES.map(i => <option key={i.value} value={i.value}>{i.label}</option>)}
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">目的 <span className="text-red-500">*</span></label>
-                <select value={purpose} onChange={e => setPurpose(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                <select aria-label="目的" value={purpose} onChange={e => setPurpose(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
                   <option value="">選択してください</option>
                   {PURPOSES.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">従業員規模</label>
-                <select value={size} onChange={e => setSize(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                <select aria-label="従業員規模" value={size} onChange={e => setSize(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
                   <option value="">選択してください</option>
                   {SIZES.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                 </select>

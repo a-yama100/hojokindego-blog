@@ -269,43 +269,43 @@ export default function AdminBlogPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">タイトル *</label>
-                    <input type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" />
+                    <input aria-label="タイトル" maxLength={2048} type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">スラッグ *</label>
-                    <input type="text" value={form.slug} onChange={e => setForm({...form, slug: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" placeholder="example-post-slug" />
+                    <input aria-label="スラッグ" maxLength={2048} type="text" value={form.slug} onChange={e => setForm({...form, slug: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" placeholder="example-post-slug" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">説明文</label>
-                  <input type="text" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" />
+                  <input aria-label="説明文" maxLength={2048} type="text" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">本文 (Markdown)</label>
-                  <textarea value={form.content} onChange={e => setForm({...form, content: e.target.value})} rows={15} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900 font-mono text-sm" />
+                  <textarea aria-label="本文 (Markdown)" maxLength={100000} value={form.content} onChange={e => setForm({...form, content: e.target.value})} rows={15} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900 font-mono text-sm" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">カテゴリ</label>
-                    <select value={form.category} onChange={e => setForm({...form, category: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900">
+                    <select aria-label="カテゴリ" value={form.category} onChange={e => setForm({...form, category: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900">
                       {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">プラン</label>
-                    <select value={form.required_plan} onChange={e => setForm({...form, required_plan: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900">
+                    <select aria-label="プラン" value={form.required_plan} onChange={e => setForm({...form, required_plan: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900">
                       {PLANS.map(p => <option key={p} value={p}>{p}</option>)}
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">アクセス</label>
-                    <select value={form.access_level} onChange={e => setForm({...form, access_level: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900">
+                    <select aria-label="アクセス" value={form.access_level} onChange={e => setForm({...form, access_level: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900">
                       {ACCESS_LEVELS.map(a => <option key={a} value={a}>{a}</option>)}
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">公開日時</label>
-                    <input type="datetime-local" value={form.published_at} onChange={e => setForm({...form, published_at: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" />
+                    <input aria-label="公開日時" maxLength={2048} type="datetime-local" value={form.published_at} onChange={e => setForm({...form, published_at: e.target.value})} className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-900" />
                   </div>
                 </div>
                 <div className="flex gap-4 items-center">
