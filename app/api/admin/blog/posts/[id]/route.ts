@@ -4,6 +4,9 @@ import { checkAdmin } from '@/lib/adminCheck'
 
 export const dynamic = 'force-dynamic'
 
+// 記事の操作はこのサイトの記事に限る（2026-11-18）
+const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -20,6 +23,7 @@ export async function GET(
       .from('blog_posts')
       .select('*')
       .eq('id', id)
+      .eq('site_id', SITE_ID)
       .single()
 
     if (error) {
@@ -67,6 +71,7 @@ export async function PUT(
         .from('blog_posts')
         .select('published_at')
         .eq('id', id)
+        .eq('site_id', SITE_ID)
         .single()
       if (!existing?.published_at) {
         updateData.published_at = new Date().toISOString()
@@ -77,6 +82,7 @@ export async function PUT(
       .from('blog_posts')
       .update(updateData)
       .eq('id', id)
+      .eq('site_id', SITE_ID)
       .select()
       .single()
 
@@ -105,6 +111,7 @@ export async function DELETE(
       .from('blog_posts')
       .update({ deleted_at: new Date().toISOString() })
       .eq('id', id)
+      .eq('site_id', SITE_ID)
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 })

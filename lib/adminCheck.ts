@@ -2,6 +2,9 @@ import { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/server'
 
+// 管理者の判定はこのサイトの利用者に限る（2026-11-18）
+const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
+
 interface AdminResult {
   isAdmin: boolean
   userId: string | null
@@ -20,12 +23,12 @@ export async function checkAdmin(request: NextRequest): Promise<AdminResult> {
     const serviceClient = createServiceClient()
     const { data: userData } = await serviceClient
       .from('users')
-      .select('is_admin')
+      .select('is_admin, site_id')
       .eq('id', user.id)
       .single()
 
     return {
-      isAdmin: userData?.is_admin === true,
+      isAdmin: userData?.is_admin === true && userData?.site_id === SITE_ID,
       userId: user.id,
     }
   } catch (error) {

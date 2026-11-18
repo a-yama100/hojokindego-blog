@@ -4,6 +4,9 @@ import { checkAdmin } from '@/lib/adminCheck'
 
 export const dynamic = 'force-dynamic'
 
+// 作成する記事はこのサイトの記事にする（2026-11-18）
+const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
+
 export async function POST(request: NextRequest) {
   const adminCheck = await checkAdmin(request)
   if (!adminCheck.isAdmin) {
@@ -29,6 +32,7 @@ export async function POST(request: NextRequest) {
       is_published: is_published || false,
       thumbnail_url: thumbnail_url || null,
       author_id: adminCheck.userId,
+      site_id: SITE_ID,
     }
 
     if (is_published) {

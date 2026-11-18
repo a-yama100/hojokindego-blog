@@ -55,7 +55,9 @@ function calcTargetScore(maxAmount: number | null, daysLeft: number): number {
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get('authorization')
-  if (authHeader !== 'Bearer ' + process.env.CRON_SECRET) {
+  // 秘密の値が未設定のときは必ず拒否する（2026-11-18）
+  const cronSecret = process.env.CRON_SECRET
+  if (!cronSecret || authHeader !== 'Bearer ' + cronSecret) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

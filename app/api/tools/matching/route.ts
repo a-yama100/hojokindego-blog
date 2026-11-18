@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callAI } from '@/lib/aiProvider'
+import { rateLimit, TOO_MANY } from '@/lib/security/rateLimit'
 import { PLAN_HIERARCHY } from '@/lib/supabase/types'
 import type { PlanType } from '@/lib/supabase/types'
 
@@ -24,6 +25,11 @@ export async function POST(request: Request) {
     const userPlan = (profile?.plan_type || 'free') as PlanType
     if (PLAN_HIERARCHY[userPlan] < PLAN_HIERARCHY['standard']) {
       return NextResponse.json({ error: 'Upgrade required' }, { status: 403 })
+    }
+
+    // AI の呼び出しは利用者ごとに1時間30回まで（2026-11-18）
+    if (!(await rateLimit('matching:user:' + user.id, 3600, 30))) {
+      return NextResponse.json(TOO_MANY, { status: 429 })
     }
 
     const { industry, purpose, size } = await request.json()

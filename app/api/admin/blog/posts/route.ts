@@ -12,7 +12,8 @@ export async function GET(request: NextRequest) {
 
   try {
     const supabase = createServiceClient()
-    const siteId = process.env.NEXT_PUBLIC_SITE_ID || ''
+    // 環境変数が無くても必ずこのサイトに絞る（2026-11-18）
+    const siteId = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
     let query = supabase
       .from('blog_posts')
       .select('id, slug, title, category, is_published, access_level, published_at, created_at')

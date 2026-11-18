@@ -3,7 +3,8 @@ import { createServiceClient } from '@/lib/supabase/server'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const keyword = searchParams.get('q') || ''
+  // .or() に入れる前に、絞り込みの記号を取り除き 100 字までにする（2026-11-18）
+  const keyword = (searchParams.get('q') || '').replace(/[,()*%\\"]/g, ' ').trim().slice(0, 100)
   const category = searchParams.get('category') || ''
   const region = searchParams.get('region') || ''
   const difficulty = searchParams.get('difficulty') || ''

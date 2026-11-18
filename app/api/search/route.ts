@@ -4,7 +4,8 @@ import { createServiceClient } from '@/lib/supabase/server'
 const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID || 'hojokindego'
 
 export async function GET(request: NextRequest) {
-  const q = request.nextUrl.searchParams.get('q')?.trim()
+  // .or() に入れる前に、絞り込みの記号を取り除き 100 字までにする（2026-11-18）
+  const q = (request.nextUrl.searchParams.get('q') || '').replace(/[,()*%\\"]/g, ' ').trim().slice(0, 100)
   if (!q || q.length < 1) {
     return NextResponse.json({ tools: [], posts: [] })
   }
