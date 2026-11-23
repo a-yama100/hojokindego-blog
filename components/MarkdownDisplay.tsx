@@ -80,7 +80,7 @@ export function MarkdownDisplay({ content, className = '' }: MarkdownDisplayProp
             ol: ({ children }) => <ol className="list-decimal pl-6 mb-4 space-y-1">{children}</ol>,
             li: ({ children }) => <li className="leading-relaxed">{children}</li>,
             a: ({ href, children }) => {
-              const isExternal = href ? (href.startsWith("http") || href.startsWith("//")) && !/(^|\/\/|\.)phaiworks\.com(\/|$|:)/i.test(href) : false;
+              const isExternal = href ? (href.startsWith("http") || href.startsWith("//")) && !/(^|\/\/|\.)hojokin\.phaiworks\.com(\/|$|:)/i.test(href) : false;
               return isExternal ? (
                 <a href={href} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">{children}</a>
               ) : (
