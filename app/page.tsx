@@ -37,7 +37,7 @@ export default function Home() {
       <Header />
       <main>
         {/* ヒーロー */}
-        <section className="pt-6">
+        <section className="pt-6 pb-6">
           <Container>
             {/* 背景の帯も本文の幅に収める（2026-11-27） */}
             <div className="relative bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 rounded-2xl px-6 py-8 md:py-12">
