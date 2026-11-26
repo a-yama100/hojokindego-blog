@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ボタンの上でカーソルを指の形にする（Tailwind 4 は button の cursor を指定しないため） */
+@layer base {
+  button:not(:disabled), [role="button"]:not([aria-disabled="true"]) { cursor: pointer; }
+}
+
+
 @theme {
   --breakpoint-nav: 860px;
 }

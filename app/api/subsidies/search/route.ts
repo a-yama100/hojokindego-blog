@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
+import { openDeadlineFilter } from '@/lib/subsidyDates'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -17,6 +18,7 @@ export async function GET(request: Request) {
     .from('subsidies')
     .select('*')
     .eq('is_active', true)
+    .or(openDeadlineFilter())
 
   if (keyword) {
     query = query.or('title.ilike.%' + keyword + '%,summary.ilike.%' + keyword + '%,detail.ilike.%' + keyword + '%')

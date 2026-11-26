@@ -66,12 +66,11 @@ export function Header() {
           </button>
           {isUserMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-              <Link href="/dashboard" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors" onClick={() => setIsUserMenuOpen(false)}>Dashboard</Link>
-              <Link href="/mypage" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
+              <Link href="/dashboard" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
                 マイページ
               </Link>
-              <Link href="/mypage" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
-                プロフィール設定
+              <Link href="/dashboard/saved" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
+                保存した補助金
               </Link>
               <div className="border-t border-gray-100 my-1" />
               <button onClick={handleSignOut} className="block w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
@@ -96,8 +95,8 @@ export function Header() {
     if (user) {
       return (
         <>
-          <Link href="/mypage" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>マイページ</Link>
-          <Link href="/mypage" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>プロフィール設定</Link>
+          <Link href="/dashboard" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>マイページ</Link>
+          <Link href="/dashboard/saved" className={mobileLinkClass} onClick={() => setIsMenuOpen(false)}>保存した補助金</Link>
           <button onClick={() => { handleSignOut(); setIsMenuOpen(false); }} className="text-left px-3 py-1.5 text-red-400 text-sm hover:text-red-300 cursor-pointer">
             ログアウト
           </button>

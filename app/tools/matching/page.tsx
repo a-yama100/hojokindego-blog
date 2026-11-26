@@ -23,7 +23,7 @@ const INDUSTRIES = [
   { value: 'retail', label: '小売・飲食' },
   { value: 'service', label: 'サービス業' },
   { value: 'construction', label: '建設業' },
-  { value: 'medical', label: '医療・福祀' },
+  { value: 'medical', label: '医療・福祉' },
   { value: 'agriculture', label: '農業・漁業' },
   { value: 'other', label: 'その他' },
 ]

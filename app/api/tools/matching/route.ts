@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { openDeadlineFilter } from '@/lib/subsidyDates'
 import { callAI } from '@/lib/aiProvider'
 import { rateLimit, TOO_MANY } from '@/lib/security/rateLimit'
 import { PLAN_HIERARCHY } from '@/lib/supabase/types'
@@ -40,6 +41,7 @@ export async function POST(request: Request) {
       .from('subsidies')
       .select('slug, title, category, difficulty, max_amount, target_score, deadline, summary')
       .eq('is_active', true)
+      .or(openDeadlineFilter())
       .order('target_score', { ascending: false })
       .limit(50)
 

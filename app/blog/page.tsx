@@ -60,7 +60,7 @@ export default async function BlogPage() {
         {/* Posts */}
 <section className="py-4">
           <Container>
-            <AdBanner siteId="otona" position="top" className="w-full" />
+            <AdBanner siteId="hojokindego" position="top" className="w-full" />
           </Container>
         </section>
         <section className="py-16">

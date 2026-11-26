@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
@@ -5,9 +6,20 @@ import { Button } from '@/components/Button'
 import { SubsidyCard } from '@/components/SubsidyCard'
 import { REGIONS } from '@/data/subsidies'
 import { createServiceClient } from '@/lib/supabase/server'
+import { openDeadlineFilter } from '@/lib/subsidyDates'
 import Link from 'next/link'
 
 export const revalidate = 3600
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const label = REGIONS[slug] || slug
+  return {
+    title: label + 'の補助金',
+    description: label + 'の補助金・助成金の一覧です。締切を過ぎたものは表示しません。',
+    alternates: { canonical: '/region/' + slug },
+  }
+}
 
 export default async function RegionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -18,6 +30,7 @@ export default async function RegionPage({ params }: { params: Promise<{ slug: s
     .from('subsidies')
     .select('*')
     .eq('is_active', true)
+    .or(openDeadlineFilter())
     .eq('region', slug)
     .order('target_score', { ascending: false })
 

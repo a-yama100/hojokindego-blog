@@ -59,11 +59,11 @@ export default function SavedPage() {
   }
 
   if (authLoading) {
-    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><p className="text-gray-500">Loading...</p></Container><Footer /></div>)
+    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><p className="text-gray-500">読み込み中...</p></Container><Footer /></div>)
   }
 
   if (!user) {
-    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><h1 className="text-2xl font-bold text-gray-900 mb-4">Sign in Required</h1><p className="text-gray-600 mb-8">Please sign in to view saved subsidies.</p><div className="flex justify-center"><Link href="/login"><Button variant="primary">Sign In</Button></Link></div></Container><Footer /></div>)
+    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><h1 className="text-2xl font-bold text-gray-900 mb-4">ログインが必要です</h1><p className="text-gray-600 mb-8">保存した補助金を見るには、ログインしてください。</p><div className="flex justify-center"><Link href="/login"><Button variant="primary">ログイン</Button></Link></div></Container><Footer /></div>)
   }
 
   return (
@@ -74,15 +74,15 @@ export default function SavedPage() {
           <div className="mb-6">
             <Link href="/dashboard" className="text-sm text-emerald-700 hover:underline">{"\u2190 Back to Dashboard"}</Link>
           </div>
-          <SectionHeader title="Saved Subsidies" subtitle={loading ? 'Loading...' : saved.length + ' subsidies saved'} />
+          <SectionHeader title="保存した補助金" subtitle={loading ? '読み込み中...' : saved.length + ' 件を保存しています'} />
 
           {loading ? (
-            <p className="text-gray-500 text-center py-12">Loading...</p>
+            <p className="text-gray-500 text-center py-12">読み込み中...</p>
           ) : saved.length === 0 ? (
             <Card hover={false}>
               <CardContent className="text-center py-12">
-                <p className="text-gray-500 mb-4">You have not saved any subsidies yet.</p>
-                <Link href="/subsidies"><Button variant="primary">Browse Subsidies</Button></Link>
+                <p className="text-gray-500 mb-4">保存した補助金はまだありません。</p>
+                <Link href="/subsidies"><Button variant="primary">補助金を探す</Button></Link>
               </CardContent>
             </Card>
           ) : (
@@ -106,14 +106,14 @@ export default function SavedPage() {
                         </div>
                         <h3 className="font-bold text-gray-900 mb-1">{s.title}</h3>
                         <p className="text-sm text-gray-500">
-                          {"Max: \u00a5" + (amt / 10000).toLocaleString() + "man"}
+                          {"上限額: " + (amt / 10000).toLocaleString() + "万円"}
                           {s.deadline ? " / Deadline: " + s.deadline : ""}
                         </p>
                         {s.summary && <p className="text-xs text-gray-400 mt-1 line-clamp-2">{s.summary}</p>}
                       </Link>
                       <div className="flex items-center gap-4 flex-shrink-0">
                         <div className="text-center">
-                          <p className="text-xs text-gray-500">Score</p>
+                          <p className="text-xs text-gray-500">スコア</p>
                           <span className={'text-2xl font-black ' + scoreColor}>{score}</span>
                         </div>
                         <Button
@@ -122,7 +122,7 @@ export default function SavedPage() {
                           onClick={() => handleRemove(s.id)}
                           disabled={removing === s.id}
                         >
-                          {removing === s.id ? 'Removing...' : 'Remove'}
+                          {removing === s.id ? '削除中...' : '削除'}
                         </Button>
                       </div>
                     </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
@@ -10,10 +11,10 @@ import { AdBanner } from '@/components/AdBanner'
 const faqItems = [
   { question: '補助金でゴー！とは？', answer: '補助金でゴー！は、国や地方自治体の補助金・助成金を検索・比較できる情報サイトです。jGrantsや各省庁・自治体の情報を集約し、あなたの事業に合った補助金を見つけるお手伝いをします。' },
   { question: '誰が補助金を申請できますか？', answer: '多くの補助金は中小企業・個人事業主・スタートアップが対象です。業種・地域・事業規模により申請可能な制度が異なります。当サイトのフィルター機能で簡単に絞り込めます。' },
-  { question: 'ターゲットスコアとは？', answer: '採択率・競争率・締切までの日数・補助額を組み合わせた0～100の独自スコアです。どの補助金から申請すべきかの優先順位付けに役立ちます。' },
-  { question: '情報は最新ですか？', answer: '公式情報源を毎日チェックし、各補助金に「最終確認日」を表示しています。締切済みの補助金は自動的に非表示になります。' },
-  { question: '申請の代行はしてもらえますか？', answer: '当サイトでは申請代行は行っておりませんが、公式申請ページへのリンクや、補助金申請に強い行政書士・社労士とのマッチングを提供しています。' },
-  { question: '無料で使えますか？', answer: '基本的な補助金検索・一覧表示は無料です。プレミアム会員は締切アラート、業種別おすすめ、採択率分析、専門家マッチングをご利用いただけます。' },
+  { question: 'ターゲットスコアとは？', answer: '採択率・競争率・締切までの日数・補助額を組み合わせた、0～100の独自のスコアです。どの補助金から申請するかを決める目安になります。' },
+  { question: '情報は最新ですか？', answer: '公式の情報源をもとに更新し、各補助金に「最終確認日」を表示しています。締切を過ぎた補助金は一覧に表示しません。申請の前には、必ず公式サイトで最新の情報をご確認ください。' },
+  { question: '申請の代行はしてもらえますか？', answer: '当サイトでは申請の代行は行っていません。各補助金のページから、公式の申請ページへ進めます。スタンダード会員は、申請書をAIが読んで改善点を示す「申請書AIレビュー」を使えます。' },
+  { question: '無料で使えますか？', answer: '補助金の検索と一覧の表示は無料です。ライト会員以上は、締切アラート・業種別のおすすめメール・採択率の分析を使えます。プランごとの内容は「会員プラン」のページをご覧ください。' },
 ]
 
 const ministries = [
@@ -39,15 +40,21 @@ export default function Home() {
         <section className="relative bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 py-8 md:py-12">
           <Container>
             <div className="text-center max-w-3xl mx-auto">
-              <p className="text-base md:text-lg text-yellow-400 font-bold mb-4 tracking-wide">
-                なんと！ 毎年「数千億円」の補助金が未申請のまま…
-              </p>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
                 あなたの事業に合った<br />
                 <span className="text-emerald-400">補助金が見つかる！</span>
               </h1>
+              <Image
+                src="/media/hero.webp"
+                alt="町工場の事務所で、経営者と相談員がノートパソコンを見ながら補助金を探している様子"
+                width={1600}
+                height={679}
+                priority
+                sizes="(min-width: 768px) 768px, 100vw"
+                className="w-full h-auto rounded-xl mb-8"
+              />
               <p className="text-xl md:text-2xl text-gray-200 mb-10 font-medium">
-                締切前に、最適な補助金を検索・比較・申請
+                締切に間に合う補助金を、検索して比べられます
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
@@ -129,27 +136,27 @@ export default function Home() {
               <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
                 補助金でゴー！であなたに合った補助金が見つかる！
               </h2>
-              <p className="text-emerald-200 text-center mb-10">業種・地域・事業規模で検索。スコア付きのおすすめをご提供</p>
+              <p className="text-emerald-200 text-center mb-10">分野・地域・補助額で探せて、スコアでおすすめの順もわかります</p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">1</div>
                   <h3 className="font-bold text-white text-lg mb-2">かんたん検索・絞り込み</h3>
-                  <p className="text-emerald-100 text-sm">省庁・地域・業種・事業規模・締切で絞り込み。数秒で該当する補助金を見つけられます。</p>
+                  <p className="text-emerald-100 text-sm">分野・地域・難易度・補助額で絞り込み、締切が近い順にも並べられます。合う補助金をすぐに見つけられます。</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">2</div>
                   <h3 className="font-bold text-white text-lg mb-2">ターゲットスコア（0～100）</h3>
-                  <p className="text-emerald-100 text-sm">採択率 + 競争率 + 締切までの日数 + 補助額 = 1つの数字で優先順位を判断。</p>
+                  <p className="text-emerald-100 text-sm">採択率・競争率・締切までの日数・補助額を1つの点数にまとめ、どれから申請するかを決めやすくします。</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">3</div>
                   <h3 className="font-bold text-white text-lg mb-2">締切管理</h3>
-                  <p className="text-emerald-100 text-sm">締切を逃さない。緊急度順に並び替え、期限切れは自動非表示。プレミアム会員はメールアラート付き。</p>
+                  <p className="text-emerald-100 text-sm">締切が近い順に並べられ、締切を過ぎた補助金は表示しません。ライト会員以上は、締切の前にメールでお知らせします。</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-emerald-500">
                   <div className="text-3xl mb-3 text-emerald-300 font-bold">4</div>
-                  <h3 className="font-bold text-white text-lg mb-2">専門家マッチング</h3>
-                  <p className="text-emerald-100 text-sm">補助金申請に強い行政書士・社労士・中小企業診断士とのマッチング。</p>
+                  <h3 className="font-bold text-white text-lg mb-2">申請書AIレビュー</h3>
+                  <p className="text-emerald-100 text-sm">申請書の文章をAIが読み、直したほうがよい点を示します（スタンダード会員以上）。</p>
                 </div>
               </div>
               <div className="flex justify-center mt-10">
@@ -200,7 +207,7 @@ export default function Home() {
                 あなたの次の補助金は、無料検索で見つかる！
               </h2>
               <p className="text-emerald-100 text-lg mb-8 leading-relaxed">
-                3,000件以上の補助金。毎日更新。検索無料
+                締切・金額・地域で絞り込んで探せます。検索は無料です。
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">

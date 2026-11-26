@@ -62,11 +62,11 @@ export default function AlertsPage() {
   }
 
   if (authLoading) {
-    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><p className="text-gray-500">Loading...</p></Container><Footer /></div>)
+    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><p className="text-gray-500">読み込み中...</p></Container><Footer /></div>)
   }
 
   if (!user) {
-    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><h1 className="text-2xl font-bold text-gray-900 mb-4">Sign in Required</h1><div className="flex justify-center"><Link href="/login"><Button variant="primary">Sign In</Button></Link></div></Container><Footer /></div>)
+    return (<div className="min-h-screen bg-gray-50"><Header /><Container className="py-20 text-center"><h1 className="text-2xl font-bold text-gray-900 mb-4">ログインが必要です</h1><div className="flex justify-center"><Link href="/login"><Button variant="primary">ログイン</Button></Link></div></Container><Footer /></div>)
   }
 
   if (!isLight) {
@@ -80,11 +80,11 @@ export default function AlertsPage() {
             </div>
             <Card hover={false}>
               <CardContent className="text-center py-12">
-                <h2 className="text-xl font-bold text-gray-900 mb-2">Deadline Alerts</h2>
-                <p className="text-gray-500 mb-4">Deadline alert notifications are available for Light plan members and above.</p>
-                <Badge variant="warning" size="md">Light Plan Required</Badge>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">締切アラート</h2>
+                <p className="text-gray-500 mb-4">締切アラートは、ライト会員以上の方が使えます。</p>
+                <Badge variant="warning" size="md">ライト会員以上</Badge>
                 <div className="flex justify-center mt-6">
-                  <Link href="/pricing"><Button variant="primary">View Plans</Button></Link>
+                  <Link href="/pricing"><Button variant="primary">プランを見る</Button></Link>
                 </div>
               </CardContent>
             </Card>
@@ -103,15 +103,15 @@ export default function AlertsPage() {
           <div className="mb-6">
             <Link href="/dashboard" className="text-sm text-emerald-700 hover:underline">{"\u2190 Back to Dashboard"}</Link>
           </div>
-          <SectionHeader title="Deadline Alerts" subtitle={loading ? 'Loading...' : alerts.length + ' alerts configured'} />
+          <SectionHeader title="締切アラート" subtitle={loading ? '読み込み中...' : alerts.length + ' 件を設定しています'} />
 
           {loading ? (
-            <p className="text-gray-500 text-center py-12">Loading...</p>
+            <p className="text-gray-500 text-center py-12">読み込み中...</p>
           ) : alerts.length === 0 ? (
             <Card hover={false}>
               <CardContent className="text-center py-12">
-                <p className="text-gray-500 mb-4">No alerts set up yet. Save a subsidy and add an alert to get notified before the deadline.</p>
-                <Link href="/subsidies"><Button variant="primary">Browse Subsidies</Button></Link>
+                <p className="text-gray-500 mb-4">締切アラートはまだありません。補助金を保存してアラートを付けると、締切の前にメールでお知らせします。</p>
+                <Link href="/subsidies"><Button variant="primary">補助金を探す</Button></Link>
               </CardContent>
             </Card>
           ) : (
@@ -128,18 +128,18 @@ export default function AlertsPage() {
                         <div className="flex items-center gap-2 mb-1">
                           <DeadlineLabel deadline={s.deadline} />
                           <Badge variant={alert.is_active ? 'success' : 'default'} size="sm">
-                            {alert.is_active ? 'Active' : 'Paused'}
+                            {alert.is_active ? '有効' : '停止中'}
                           </Badge>
                         </div>
                         <h3 className="font-bold text-gray-900 mb-1">{s.title}</h3>
                         <p className="text-sm text-gray-500">
-                          {"Alert: " + alert.alert_days_before + " days before deadline"}
+                          {"締切の " + alert.alert_days_before + " 日前にお知らせ"}
                           {s.deadline ? " (Deadline: " + s.deadline + ")" : ""}
                         </p>
                       </Link>
                       <div className="flex items-center gap-4 flex-shrink-0">
                         <div className="text-center">
-                          <p className="text-xs text-gray-500">Score</p>
+                          <p className="text-xs text-gray-500">スコア</p>
                           <span className={'text-2xl font-black ' + scoreColor}>{score}</span>
                         </div>
                         <Button
@@ -148,7 +148,7 @@ export default function AlertsPage() {
                           onClick={() => handleRemove(alert.id)}
                           disabled={removing === alert.id}
                         >
-                          {removing === alert.id ? 'Removing...' : 'Remove'}
+                          {removing === alert.id ? '削除中...' : '削除'}
                         </Button>
                       </div>
                     </div>

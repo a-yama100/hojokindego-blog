@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       <Header />
       <main>
         <section className="bg-gray-950 text-white py-12">
-          <Container>
+          <Container size="md">
             <h1 className="text-3xl font-bold text-center">プライバシーポリシー</h1>
           </Container>
         </section>

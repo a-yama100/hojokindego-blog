@@ -15,10 +15,10 @@ import { hasAccess } from '@/lib/supabase/types'
 import type { PlanType } from '@/lib/supabase/types'
 
 const PLAN_LABELS: Record<string, string> = {
-  free: 'Free',
-  light: 'Light',
-  standard: 'Standard',
-  premium: 'Premium',
+  free: '無料会員',
+  light: 'ライト会員',
+  standard: 'スタンダード会員',
+  premium: 'プレミアム会員',
 }
 
 const PLAN_BADGE: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'premium'> = {
@@ -80,7 +80,7 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50">
         <Header />
         <Container className="py-20 text-center">
-          <p className="text-gray-500">Loading...</p>
+          <p className="text-gray-500">読み込み中...</p>
         </Container>
         <Footer />
       </div>
@@ -92,11 +92,11 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50">
         <Header />
         <Container className="py-20 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Sign in Required</h1>
-          <p className="text-gray-600 mb-8">Please sign in to access your dashboard.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">ログインが必要です</h1>
+          <p className="text-gray-600 mb-8">マイページを見るには、ログインしてください。</p>
           <div className="flex justify-center gap-4">
-            <Link href="/login"><Button variant="primary">Sign In</Button></Link>
-            <Link href="/signup"><Button variant="outline">Create Account</Button></Link>
+            <Link href="/login"><Button variant="primary">ログイン</Button></Link>
+            <Link href="/signup"><Button variant="outline">無料で登録する</Button></Link>
           </div>
         </Container>
         <Footer />
@@ -114,20 +114,20 @@ export default function DashboardPage() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold mb-2">
-                  {"Welcome back, " + (user.username || user.email.split("@")[0])}
+                  {"ようこそ、" + (user.username || user.email.split("@")[0]) + " さん"}
                 </h1>
                 <div className="flex items-center gap-3">
-                  <Badge variant={PLAN_BADGE[plan] || 'default'} size="md">{PLAN_LABELS[plan] || 'Free'} Plan</Badge>
+                  <Badge variant={PLAN_BADGE[plan] || 'default'} size="md">{PLAN_LABELS[plan] || '無料会員'}</Badge>
                   {user.subscription_expires_at && (
                     <span className="text-emerald-200 text-sm">
-                      {"Expires: " + new Date(user.subscription_expires_at).toLocaleDateString()}
+                      {"有効期限: " + new Date(user.subscription_expires_at).toLocaleDateString('ja-JP')}
                     </span>
                   )}
                 </div>
               </div>
               {!isStandard && (
                 <Link href="/pricing">
-                  <Button variant="white" size="sm">Upgrade Plan</Button>
+                  <Button variant="white" size="sm">プランを変更する</Button>
                 </Link>
               )}
             </div>
@@ -138,7 +138,7 @@ export default function DashboardPage() {
             <Link href="/dashboard/saved">
               <Card hover>
                 <CardContent>
-                  <p className="text-sm text-gray-500 mb-1">Saved Subsidies</p>
+                  <p className="text-sm text-gray-500 mb-1">保存した補助金</p>
                   <p className="text-3xl font-bold text-gray-900">{loading ? '-' : (summary?.savedCount || 0)}</p>
                 </CardContent>
               </Card>
@@ -146,33 +146,33 @@ export default function DashboardPage() {
             <Link href="/dashboard/alerts">
               <Card hover>
                 <CardContent>
-                  <p className="text-sm text-gray-500 mb-1">Active Alerts</p>
+                  <p className="text-sm text-gray-500 mb-1">設定中の締切アラート</p>
                   <p className="text-3xl font-bold text-gray-900">{loading ? '-' : (summary?.alertsCount || 0)}</p>
-                  {!isLight && <p className="text-xs text-amber-600 mt-1">Light plan required</p>}
+                  {!isLight && <p className="text-xs text-amber-600 mt-1">ライト会員以上で使えます</p>}
                 </CardContent>
               </Card>
             </Link>
             <Card hover={false}>
               <CardContent>
-                <p className="text-sm text-gray-500 mb-1">Urgent Deadlines</p>
+                <p className="text-sm text-gray-500 mb-1">締切が近い補助金</p>
                 <p className="text-3xl font-bold text-red-600">{loading ? '-' : (summary?.urgentDeadlines || 0)}</p>
-                <p className="text-xs text-gray-400 mt-1">Within 14 days</p>
+                <p className="text-xs text-gray-400 mt-1">14日以内</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Quick Search */}
           <div className="mb-8">
-            <SectionHeader title="Quick Search" subtitle="Find subsidies matching your business" />
+            <SectionHeader title="補助金を探す" subtitle="事業に合う補助金を見つけましょう" />
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/subsidies" className="flex-1">
-                <Button variant="primary" fullWidth>Search All Subsidies</Button>
+                <Button variant="primary" fullWidth>すべての補助金を検索</Button>
               </Link>
               <Link href="/subsidies?sort=deadline" className="flex-1">
-                <Button variant="outline" fullWidth>Deadline Soon</Button>
+                <Button variant="outline" fullWidth>締切が近い順</Button>
               </Link>
               <Link href="/subsidies?sort=score" className="flex-1">
-                <Button variant="outline" fullWidth>Top Scores</Button>
+                <Button variant="outline" fullWidth>スコアが高い順</Button>
               </Link>
             </div>
           </div>
@@ -180,16 +180,16 @@ export default function DashboardPage() {
           {/* Saved Subsidies Preview */}
           <div className="mb-8">
             <SectionHeader
-              title="Saved Subsidies"
-              action={saved.length > 0 ? <Link href="/dashboard/saved"><Button variant="ghost" size="sm">View All</Button></Link> : undefined}
+              title="保存した補助金"
+              action={saved.length > 0 ? <Link href="/dashboard/saved"><Button variant="ghost" size="sm">すべて見る</Button></Link> : undefined}
             />
             {loading ? (
-              <p className="text-gray-500 text-center py-8">Loading...</p>
+              <p className="text-gray-500 text-center py-8">読み込み中...</p>
             ) : saved.length === 0 ? (
               <Card hover={false}>
                 <CardContent className="text-center py-8">
-                  <p className="text-gray-500 mb-4">No saved subsidies yet.</p>
-                  <Link href="/subsidies"><Button variant="primary" size="sm">Browse Subsidies</Button></Link>
+                  <p className="text-gray-500 mb-4">保存した補助金はまだありません。</p>
+                  <Link href="/subsidies"><Button variant="primary" size="sm">補助金を探す</Button></Link>
                 </CardContent>
               </Card>
             ) : (
@@ -213,7 +213,7 @@ export default function DashboardPage() {
                           <h3 className="font-bold text-gray-900 truncate">{s.title}</h3>
                         </div>
                         <div className="text-right flex-shrink-0">
-                          <p className="text-xs text-gray-500">Score</p>
+                          <p className="text-xs text-gray-500">スコア</p>
                           <span className={'text-2xl font-black ' + scoreColor}>{score}</span>
                         </div>
                       </div>
@@ -226,13 +226,13 @@ export default function DashboardPage() {
 
           {/* Recommended Subsidies */}
           <div className="mb-8">
-            <SectionHeader title="Recommended" subtitle="Top-scoring subsidies for you" />
+            <SectionHeader title="おすすめの補助金" subtitle="スコアが高い補助金" />
             {loading ? (
-              <p className="text-gray-500 text-center py-8">Loading...</p>
+              <p className="text-gray-500 text-center py-8">読み込み中...</p>
             ) : recommended.length === 0 ? (
               <Card hover={false}>
                 <CardContent className="text-center py-8">
-                  <p className="text-gray-500">No subsidies available.</p>
+                  <p className="text-gray-500">表示できる補助金がありません。</p>
                 </CardContent>
               </Card>
             ) : (
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                           <h3 className="font-bold text-gray-900 truncate">{s.title}</h3>
                         </div>
                         <div className="text-right flex-shrink-0">
-                          <p className="text-xs text-gray-500">Score</p>
+                          <p className="text-xs text-gray-500">スコア</p>
                           <span className={'text-2xl font-black ' + scoreColor}>{score}</span>
                         </div>
                       </div>
@@ -268,53 +268,53 @@ export default function DashboardPage() {
           {/* Plan Features */}
           {!isStandard && (
             <div className="bg-white rounded-xl border border-emerald-200 p-6 mb-8">
-              <SectionHeader title="Unlock More Features" />
+              <SectionHeader title="有料プランでできること" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="flex items-start gap-3">
                   <span className="text-emerald-600 font-bold text-lg">1</span>
                   <div>
-                    <p className="font-medium text-gray-900">Deadline Alerts</p>
-                    <p className="text-sm text-gray-500">Get email notifications before deadlines</p>
-                    <Badge variant={isLight ? 'success' : 'warning'} size="sm">{isLight ? 'Available' : 'Light+'}</Badge>
+                    <p className="font-medium text-gray-900">締切アラート</p>
+                    <p className="text-sm text-gray-500">締切の前にメールでお知らせします</p>
+                    <Badge variant={isLight ? 'success' : 'warning'} size="sm">{isLight ? '利用できます' : 'ライト会員以上'}</Badge>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-emerald-600 font-bold text-lg">2</span>
                   <div>
-                    <p className="font-medium text-gray-900">All Tools</p>
-                    <p className="text-sm text-gray-500">Unlimited access to all analysis tools</p>
-                    <Badge variant="warning" size="sm">Standard+</Badge>
+                    <p className="font-medium text-gray-900">補助金マッチング・申請書AIレビュー</p>
+                    <p className="text-sm text-gray-500">事業に合う補助金を探すツールと、申請書をAIが読んで改善点を示すツール</p>
+                    <Badge variant="warning" size="sm">スタンダード会員以上</Badge>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-emerald-600 font-bold text-lg">3</span>
                   <div>
-                    <p className="font-medium text-gray-900">Expert Matching</p>
-                    <p className="text-sm text-gray-500">Connect with certified subsidy consultants</p>
-                    <Badge variant="warning" size="sm">Standard+</Badge>
+                    <p className="font-medium text-gray-900">実践ガイド・ダウンロード素材</p>
+                    <p className="text-sm text-gray-500">月1テーマの実践ガイドと、申請に使える素材</p>
+                    <Badge variant="warning" size="sm">スタンダード会員以上</Badge>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-emerald-600 font-bold text-lg">4</span>
                   <div>
-                    <p className="font-medium text-gray-900">1-on-1 Sessions</p>
-                    <p className="text-sm text-gray-500">Monthly personalized coaching</p>
-                    <Badge variant="premium" size="sm">Premium</Badge>
+                    <p className="font-medium text-gray-900">AIチャット相談・優先メールサポート</p>
+                    <p className="text-sm text-gray-500">AIに個別に相談でき、メールでの質問にも優先して回答します</p>
+                    <Badge variant="premium" size="sm">プレミアム会員</Badge>
                   </div>
                 </div>
               </div>
               <div className="flex justify-center">
-                <Link href="/pricing"><Button variant="primary">View Plans</Button></Link>
+                <Link href="/pricing"><Button variant="primary">プランを見る</Button></Link>
               </div>
             </div>
           )}
 
           {/* Quick Links */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Link href="/subsidies"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">Search</p><p className="text-xs text-gray-500">Browse all</p></CardContent></Card></Link>
-            <Link href="/blog"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">Blog</p><p className="text-xs text-gray-500">Latest articles</p></CardContent></Card></Link>
-            <Link href="/mypage"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">Profile</p><p className="text-xs text-gray-500">Settings</p></CardContent></Card></Link>
-            <Link href="/contact"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">Support</p><p className="text-xs text-gray-500">Contact us</p></CardContent></Card></Link>
+            <Link href="/subsidies"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">補助金検索</p><p className="text-xs text-gray-500">すべての補助金</p></CardContent></Card></Link>
+            <Link href="/blog"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">ブログ</p><p className="text-xs text-gray-500">新しい記事</p></CardContent></Card></Link>
+            <Link href="/dashboard/alerts"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">締切アラート</p><p className="text-xs text-gray-500">アラートの一覧</p></CardContent></Card></Link>
+            <Link href="/contact"><Card><CardContent className="text-center py-4"><p className="font-medium text-gray-900">お問い合わせ</p><p className="text-xs text-gray-500">ご質問・ご要望</p></CardContent></Card></Link>
           </div>
         </Container>
       </main>

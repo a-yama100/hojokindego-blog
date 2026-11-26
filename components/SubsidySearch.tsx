@@ -40,7 +40,7 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
 
-  const hasParams = searchParams.get('q') || searchParams.get('category') || searchParams.get('region') || searchParams.get('difficulty') || searchParams.get('min')
+  const hasParams = searchParams.get('q') || searchParams.get('category') || searchParams.get('region') || searchParams.get('difficulty') || searchParams.get('min') || (searchParams.get('sort') && searchParams.get('sort') !== 'score')
 
   useEffect(() => {
     if (hasParams) { doSearch() }
@@ -184,7 +184,7 @@ export function SubsidySearch({ initialData }: { initialData: SubsidyItem[] }) {
         </div>
       ) : (
         <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-          <p className="text-gray-500">{"椝件に合う補助金が見つかりませんでした。"}</p>
+          <p className="text-gray-500">{"条件に合う補助金が見つかりませんでした。"}</p>
         </div>
       )}
     </div>

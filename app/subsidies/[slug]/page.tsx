@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
@@ -6,9 +7,29 @@ import { DIFFICULTY_COLOR_BORDER } from '@/data/subsidies'
 import { DeadlineLabel } from '@/components/DeadlineLabel'
 import { createServiceClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { SubsidyMemberSection } from '@/components/SubsidyMemberSection'
 
 export const revalidate = 3600
+
+// 補助金ごとの title・description（2026-11-26。以前はどのページもサイト全体の title のままだった）
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const supabase = createServiceClient()
+  const { data: s } = await supabase
+    .from('subsidies')
+    .select('title, summary')
+    .eq('slug', slug)
+    .eq('is_active', true)
+    .single()
+  if (!s) return { title: '補助金が見つかりません', robots: { index: false } }
+  const desc = (s.summary || '').replace(/--+/g, '').replace(/\s+/g, ' ').trim().slice(0, 120)
+  return {
+    title: s.title,
+    description: desc || s.title + 'の概要・上限額・締切・主な要件をまとめています。',
+    alternates: { canonical: '/subsidies/' + slug },
+  }
+}
 
 export default async function SubsidyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -20,22 +41,8 @@ export default async function SubsidyDetailPage({ params }: { params: Promise<{ 
     .eq('is_active', true)
     .single()
 
-  if (!s) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <main>
-          <Container className="py-16 text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">{"\u88dc\u52a9\u91d1\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093"}</h1>
-            <div className="flex justify-center">
-              <Link href="/subsidies"><Button variant="primary">{"\u88dc\u52a9\u91d1\u4e00\u89a7\u306b\u623b\u308b"}</Button></Link>
-            </div>
-          </Container>
-        </main>
-        <Footer />
-      </div>
-    )
-  }
+  // 見つからない・受付を終えた補助金は 404 を返す（2026-11-26。以前は 200 で「見つかりません」を表示していた）
+  if (!s) notFound()
   const score = s.target_score || 0
   const amt = s.max_amount || 0
   const scoreColor = score >= 75 ? 'text-green-700' : score >= 55 ? 'text-yellow-600' : 'text-red-600'

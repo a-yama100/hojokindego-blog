@@ -101,7 +101,7 @@ export default function ContactPage() {
       <Header />
       <main>
         {/* Hero */}
-        <PageHero title="お問い合わせ" subtitle="ご質問・ご要望をお気軽にお寄せください" />
+        <PageHero title="お問い合わせ" subtitle="ご質問・ご要望をお気軽にお寄せください" size="sm" />
 
         <section className="py-12">
           <Container size="sm">
@@ -162,7 +162,7 @@ export default function ContactPage() {
 
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <p className="text-sm text-gray-500 text-center">
-                  送信内容は最新暗号技術により保護され、個人情報保護方針に基づき第三者に漏洩することはありません。<br />
+                  送信内容は暗号化して送られます。いただいた個人情報はプライバシーポリシーに沿って扱い、第三者に渡すことはありません。<br />
                   24時間以内に返信がない場合は、迷惑メール等をご確認ください。
                 </p>
               </div>

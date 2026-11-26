@@ -1,18 +1,27 @@
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
 import { SubsidySearch } from '@/components/SubsidySearch'
 import { createServiceClient } from '@/lib/supabase/server'
+import { openDeadlineFilter } from '@/lib/subsidyDates'
 
 export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: '補助金検索',
+  description: '中小企業・個人事業主向けの補助金・助成金を、分野・地域・難易度・補助額で絞り込んで探せます。締切が近い順にも並べられます。',
+  alternates: { canonical: '/subsidies' },
+}
 
 export default async function SubsidiesPage() {
   const supabase = createServiceClient()
   const { data: subsidies } = await supabase
     .from('subsidies')
-    .select('*')
+    .select('id, slug, title, summary, category, region, max_amount, difficulty, target_score, deadline')
     .eq('is_active', true)
+    .or(openDeadlineFilter())
     .order('target_score', { ascending: false })
 
   return (

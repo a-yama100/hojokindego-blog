@@ -14,7 +14,7 @@ export default function TermsPage() {
       <Header />
       <main>
         <section className="bg-gray-950 text-white py-12">
-          <Container>
+          <Container size="md">
             <h1 className="text-3xl font-bold text-center">利用規約</h1>
           </Container>
         </section>
@@ -34,7 +34,7 @@ export default function TermsPage() {
             </section>
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-3">4. 専門的アドバイスについて</h2>
-              <p className="text-gray-700">本サイトの情報は法律・金融・経営に関するアドバイスを構成するものではありません。補助金申請には、中小企業診断士や専門家にご相談ください。</p>
+              <p className="text-gray-700">本サイトの情報は、法律・お金・経営についての専門的な助言ではありません。補助金の申請は、中小企業診断士などの専門家にご相談ください。</p>
             </section>
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-3">5. 知的財産権</h2>

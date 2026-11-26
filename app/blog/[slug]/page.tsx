@@ -156,7 +156,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
             <div className="hidden lg:block w-72 flex-shrink-0">
               <div className="sticky top-28">
-                <Sidebar siteId="otona" />
+                <Sidebar siteId="hojokindego" />
               </div>
             </div>
           </div>
