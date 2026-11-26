@@ -39,11 +39,14 @@ export default async function RegionPage({ params }: { params: Promise<{ slug: s
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main>
-        <section className="bg-gray-950 text-white py-10">
+        <section className="pt-6">
           <Container>
-            <div className="text-center">
-              <p className="text-emerald-400 text-sm font-medium mb-1">{"\u5730\u57df\u5225\u88dc\u52a9\u91d1"}</p>
-              <h1 className="text-3xl md:text-4xl font-bold">{label}</h1>
+            {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+            <div className="bg-gray-950 text-white rounded-2xl px-6 py-10">
+              <div className="text-center">
+                <p className="text-emerald-400 text-sm font-medium mb-1">{"\u5730\u57df\u5225\u88dc\u52a9\u91d1"}</p>
+                <h1 className="text-3xl md:text-4xl font-bold">{label}</h1>
+              </div>
             </div>
           </Container>
         </section>

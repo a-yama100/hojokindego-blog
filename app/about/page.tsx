@@ -15,11 +15,14 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white">
       <Header />
       <main>
-        <section className="bg-gray-950 text-white py-16">
+        <section className="pt-6">
           <Container size="md">
-            <div className="text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">補助金でゴー！について</h1>
-              <p className="text-gray-400 max-w-2xl mx-auto">すべての事業者に、補助金情報をわかりやすく</p>
+            {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+            <div className="bg-gray-950 text-white rounded-2xl px-6 py-16">
+              <div className="text-center">
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">補助金でゴー！について</h1>
+                <p className="text-gray-400 max-w-2xl mx-auto">すべての事業者に、補助金情報をわかりやすく</p>
+              </div>
             </div>
           </Container>
         </section>

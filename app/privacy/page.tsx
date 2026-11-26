@@ -13,9 +13,12 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-white">
       <Header />
       <main>
-        <section className="bg-gray-950 text-white py-12">
+        <section className="pt-6">
           <Container size="md">
-            <h1 className="text-3xl font-bold text-center">プライバシーポリシー</h1>
+            {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+            <div className="bg-gray-950 text-white rounded-2xl px-6 py-12">
+              <h1 className="text-3xl font-bold text-center">プライバシーポリシー</h1>
+            </div>
           </Container>
         </section>
         <Container size="md" className="py-12">

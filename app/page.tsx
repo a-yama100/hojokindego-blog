@@ -37,32 +37,35 @@ export default function Home() {
       <Header />
       <main>
         {/* ヒーロー */}
-        <section className="relative bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 py-8 md:py-12">
+        <section className="pt-6">
           <Container>
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                あなたの事業に合った<br />
-                <span className="text-emerald-400">補助金が見つかる！</span>
-              </h1>
-              <Image
-                src="/media/hero.webp"
-                alt="町工場の事務所で、経営者と相談員がノートパソコンを見ながら補助金を探している様子"
-                width={1600}
-                height={679}
-                priority
-                sizes="(min-width: 768px) 768px, 100vw"
-                className="w-full h-auto rounded-xl mb-8"
-              />
-              <p className="text-xl md:text-2xl text-gray-200 mb-10 font-medium">
-                締切に間に合う補助金を、検索して比べられます
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
-                  補助金を検索する
-                </Link>
-                <Link href="/blog" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-white border-2 border-white hover:bg-white/10 text-lg transition-colors">
-                  ブログを読む
-                </Link>
+            {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+            <div className="relative bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 rounded-2xl px-6 py-8 md:py-12">
+              <div className="text-center max-w-3xl mx-auto">
+                <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                  あなたの事業に合った<br />
+                  <span className="text-emerald-400">補助金が見つかる！</span>
+                </h1>
+                <Image
+                  src="/media/hero.webp"
+                  alt="町工場の事務所で、経営者と相談員がノートパソコンを見ながら補助金を探している様子"
+                  width={1600}
+                  height={679}
+                  priority
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  className="w-full h-auto rounded-xl mb-8"
+                />
+                <p className="text-xl md:text-2xl text-gray-200 mb-10 font-medium">
+                  締切に間に合う補助金を、検索して比べられます
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/subsidies" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-gray-900 bg-yellow-400 hover:bg-yellow-300 shadow-lg text-lg transition-colors">
+                    補助金を検索する
+                  </Link>
+                  <Link href="/blog" className="inline-block px-8 py-4 text-center rounded-lg font-bold text-white border-2 border-white hover:bg-white/10 text-lg transition-colors">
+                    ブログを読む
+                  </Link>
+                </div>
               </div>
             </div>
           </Container>

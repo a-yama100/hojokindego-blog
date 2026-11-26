@@ -9,12 +9,15 @@ interface PageHeroProps {
 
 export function PageHero({ title, subtitle, size = 'lg' }: PageHeroProps) {
   return (
-    <section className="bg-gray-950 text-white py-16">
+    <section className="pt-6">
       <Container size={size}>
-        <h1 className="text-3xl md:text-4xl font-bold text-center">{title}</h1>
-        {subtitle && (
-          <p className="text-xl text-gray-400 text-center mt-4">{subtitle}</p>
-        )}
+        {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+        <div className="bg-gray-950 text-white rounded-2xl px-6 py-16">
+          <h1 className="text-3xl md:text-4xl font-bold text-center">{title}</h1>
+          {subtitle && (
+            <p className="text-xl text-gray-400 text-center mt-4">{subtitle}</p>
+          )}
+        </div>
       </Container>
     </section>
   )

@@ -28,12 +28,15 @@ export default async function SubsidiesPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main>
-        <section className="bg-gray-950 text-white py-10">
+        <section className="pt-6">
           <Container>
-            <div className="text-center">
-              <p className="text-emerald-400 text-sm font-medium mb-1">{"補助金検索"}</p>
-              <h1 className="text-3xl md:text-4xl font-bold">{"あなたに合った補助金を見つけよう"}</h1>
-              <p className="text-gray-400 text-sm mt-2">{"中小企業・個人事業主向けの補助金・助成金一覧"}</p>
+            {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+            <div className="bg-gray-950 text-white rounded-2xl px-6 py-10">
+              <div className="text-center">
+                <p className="text-emerald-400 text-sm font-medium mb-1">{"補助金検索"}</p>
+                <h1 className="text-3xl md:text-4xl font-bold">{"あなたに合った補助金を見つけよう"}</h1>
+                <p className="text-gray-400 text-sm mt-2">{"中小企業・個人事業主向けの補助金・助成金一覧"}</p>
+              </div>
             </div>
           </Container>
         </section>

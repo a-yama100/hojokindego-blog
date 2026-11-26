@@ -53,11 +53,14 @@ export default async function SubsidyDetailPage({ params }: { params: Promise<{ 
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main>
-        <section className="bg-gray-950 text-white py-10">
+        <section className="pt-6">
           <Container>
-            <p className="text-emerald-400 text-sm font-medium mb-2">{"\u88dc\u52a9\u91d1\u8a73\u7d30"}</p>
-            <h1 className="text-2xl md:text-3xl font-bold">{s.title}</h1>
-            {s.ministry && <p className="text-gray-400 text-sm mt-2">{s.ministry}</p>}
+            {/* 背景の帯も本文の幅に収める（2026-11-27） */}
+            <div className="bg-gray-950 text-white rounded-2xl px-6 py-10">
+              <p className="text-emerald-400 text-sm font-medium mb-2">{"\u88dc\u52a9\u91d1\u8a73\u7d30"}</p>
+              <h1 className="text-2xl md:text-3xl font-bold">{s.title}</h1>
+              {s.ministry && <p className="text-gray-400 text-sm mt-2">{s.ministry}</p>}
+            </div>
           </Container>
         </section>
         <Container className="py-8">
